@@ -70,17 +70,18 @@ void nuskaitytiIsFailo(const std::string& filename, std::list<Student>& studenta
     nuskaitytiIsFailoTemplate(filename, studentai);
 }
 
-void issaugotiIFaila(const string& filename, const vector<Student>& students, int metod) {
+template <typename Container>
+void issaugotiIFailaTemplate(const std::string& filename, const Container& students, int metod) {
     std::ofstream fout(filename, std::ios::out | std::ios::trunc);
     if (!fout.is_open()) return;
 
-    fout << setw(25) << left << "Pavarde"
-          << setw(25) << left << "Vardas";
+    fout << std::setw(25) << std::left << "Pavarde"
+         << std::setw(25) << std::left << "Vardas";
     if (metod == 3) {
-        fout << setw(15) << left << "Galutinis (Vid.)"
-              << setw(15) << left << "Galutinis (Med.)";
+        fout << std::setw(15) << std::left << "Galutinis (Vid.)"
+             << std::setw(15) << std::left << "Galutinis (Med.)";
     } else {
-        fout << setw(15) << left << "Galutinis";
+        fout << std::setw(15) << std::left << "Galutinis";
     }
     fout << "\n";
 
@@ -93,13 +94,13 @@ void issaugotiIFaila(const string& filename, const vector<Student>& students, in
         int n = 0;
         if (metod == 3) {
             n = std::snprintf(line, sizeof(line),
-                               "%-25s %-25s %15.2f %15.2f\n",
-                               s.pav().c_str(), s.var().c_str(), s.galVid(), s.galMed());
+                              "%-25s %-25s %15.2f %15.2f\n",
+                              s.pav().c_str(), s.var().c_str(), s.galVid(), s.galMed());
         } else {
             double galutinis = (metod == 1 ? s.galVid() : s.galMed());
             n = std::snprintf(line, sizeof(line),
-                               "%-25s %-25s %15.2f\n",
-                               s.pav().c_str(), s.var().c_str(), galutinis);
+                              "%-25s %-25s %15.2f\n",
+                              s.pav().c_str(), s.var().c_str(), galutinis);
         }
         buffer.append(line, static_cast<size_t>(n));
         if (buffer.size() > FLUSH_THRESHOLD) {
@@ -108,48 +109,14 @@ void issaugotiIFaila(const string& filename, const vector<Student>& students, in
         }
     }
     if (!buffer.empty()) fout.write(buffer.data(), buffer.size());
-    fout.close();
 }
 
-void issaugotiIFaila(const string& filename, const list<Student>& students, int metod) {
-    std::ofstream fout(filename, std::ios::out | std::ios::trunc);
-    if (!fout.is_open()) return;
+void issaugotiIFaila(const std::string& filename, const std::vector<Student>& students, int metod) {
+    issaugotiIFailaTemplate(filename, students, metod);
+}
 
-    fout << setw(25) << left << "Pavarde"
-          << setw(25) << left << "Vardas";
-    if (metod == 3) {
-        fout << setw(15) << left << "Galutinis (Vid.)"
-              << setw(15) << left << "Galutinis (Med.)";
-    } else {
-        fout << setw(15) << left << "Galutinis";
-    }
-    fout << "\n";
-
-    std::string buffer;
-    buffer.reserve(1 << 20);
-    const size_t FLUSH_THRESHOLD = (1 << 20);
-
-    for (const auto& s : students) {
-        char line[512];
-        int n = 0;
-        if (metod == 3) {
-            n = std::snprintf(line, sizeof(line),
-                               "%-25s %-25s %15.2f %15.2f\n",
-                               s.pav().c_str(), s.var().c_str(), s.galVid(), s.galMed());
-        } else {
-            double galutinis = (metod == 1 ? s.galVid() : s.galMed());
-            n = std::snprintf(line, sizeof(line),
-                               "%-25s %-25s %15.2f\n",
-                               s.pav().c_str(), s.var().c_str(), galutinis);
-        }
-        buffer.append(line, static_cast<size_t>(n));
-        if (buffer.size() > FLUSH_THRESHOLD) {
-            fout.write(buffer.data(), buffer.size());
-            buffer.clear();
-        }
-    }
-    if (!buffer.empty()) fout.write(buffer.data(), buffer.size());
-    fout.close();
+void issaugotiIFaila(const std::string& filename, const std::list<Student>& students, int metod) {
+    issaugotiIFailaTemplate(filename, students, metod);
 }
 
 int inputSkaicius(const string& pranesimas, int min, int max) {
