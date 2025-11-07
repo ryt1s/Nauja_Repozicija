@@ -68,92 +68,54 @@ int main() {
         cout << setprecision(2) << defaultfloat;
     };
 
-    if (useList) {
-        if (ivestis == 3) {
-            cout << "Iveskite failo pavadinima: "; cin >> failas;
-            auto start_read = high_resolution_clock::now();
+     auto ivestiStudentus = [](auto& studentai, int ivestis) {
+        char testi;
+        do {
+            string vardas, pavarde;
+            vector<int> pazymiai;
+            int egzaminas = 0;
+
+            cout << "Vardas: "; cin >> vardas;
+            cout << "Pavarde: "; cin >> pavarde;
+
+            if (ivestis == 1) { 
+                int laik;
+                while ((laik = inputSkaicius("ND (0 baigti): ", 0, 10)) != 0)
+                    pazymiai.push_back(laik);
+                egzaminas = inputSkaicius("Egzaminas: ", 1, 10);
+            } else {
+                int kiek = rand() % 10 + 1;
+                cout << "ND ivertinimai: ";
+                for (int i = 0; i < kiek; i++) {
+                    int nd = rand() % 10 + 1;
+                    pazymiai.push_back(nd);
+                    cout << nd << " ";
+                }
+                egzaminas = rand() % 10 + 1;
+                cout << "\nEgzamino ivertinimas: " << egzaminas << endl;
+            }
+
+            Student naujas_stud(pavarde, vardas, pazymiai, egzaminas);
+            cout << "Objekto atminties adresas: " << &naujas_stud << endl;
+            studentai.push_back(std::move(naujas_stud));
+
+            cout << "Dar vienas? (t/n) "; cin >> testi;
+        } while (testi == 't' || testi == 'T');
+    };
+
+    if (ivestis == 3) {
+        cout << "Iveskite failo pavadinima: "; cin >> failas;
+        auto start_read = high_resolution_clock::now();
+        if (useList) {
             nuskaitytiIsFailo(failas, studentai_list);
-            t_read = duration<double>(high_resolution_clock::now() - start_read).count();
         } else {
-            char testi;
-            do {
-                string vardas, pavarde;
-                vector<int> pazymiai;
-                int egzaminas = 0;
-
-                cout << "Vardas: "; cin >> vardas;
-                cout << "Pavarde: "; cin >> pavarde;
-
-                if (ivestis == 1) {
-                    int laik;
-                    while (true) {
-                        laik = inputSkaicius("ND (0 baigti): ", 0, 10);
-                        if (laik == 0) break;
-                        pazymiai.push_back(laik);
-                    }
-                    egzaminas = inputSkaicius("Egzaminas: ", 1, 10);
-                } else {
-                    int kiek = rand() % 10 + 1;
-                    cout << "ND ivertinimai: ";
-                    for (int i = 0; i < kiek; i++) {
-                        int nd = rand() % 10 + 1;
-                        pazymiai.push_back(nd);
-                        cout << nd << " ";
-                    }
-                    egzaminas = rand() % 10 + 1;
-                    cout << "\nEgzamino ivertinimas: " << egzaminas << endl;
-                }
-
-                Student naujas_stud(pavarde, vardas, pazymiai, egzaminas);
-                cout << "Objekto atminties adresas: " << &naujas_stud << endl;
-                studentai_list.push_back(std::move(naujas_stud));
-                cout << "Dar vienas? (t/n) "; cin >> testi;
-            } while (testi == 't' || testi == 'T');
-            failas = "manual_input";
-        }
-    } else {
-        if (ivestis == 3) {
-            cout << "Iveskite failo pavadinima: "; cin >> failas;
-            auto start_read = high_resolution_clock::now();
             nuskaitytiIsFailo(failas, studentai_vec);
-            t_read = duration<double>(high_resolution_clock::now() - start_read).count();
-        } else {
-            char testi;
-            do {
-                string vardas, pavarde;
-                vector<int> pazymiai;
-                int egzaminas = 0;
-
-                cout << "Vardas: "; cin >> vardas;
-                cout << "Pavarde: "; cin >> pavarde;
-
-                if (ivestis == 1) {
-                    int laik;
-                    while (true) {
-                        laik = inputSkaicius("ND (0 baigti): ", 0, 10);
-                        if (laik == 0) break;
-                        pazymiai.push_back(laik);
-                    }
-                    egzaminas = inputSkaicius("Egzaminas: ", 1, 10);
-                } else {
-                    int kiek = rand() % 10 + 1;
-                    cout << "ND ivertinimai: ";
-                    for (int i = 0; i < kiek; i++) {
-                        int nd = rand() % 10 + 1;
-                        pazymiai.push_back(nd);
-                        cout << nd << " ";
-                    }
-                    egzaminas = rand() % 10 + 1;
-                    cout << "\nEgzamino ivertinimas: " << egzaminas << endl;
-                }
-
-                Student naujas_stud(pavarde, vardas, pazymiai, egzaminas);
-                cout << "Objekto atminties adresas: " << &naujas_stud << endl;
-                studentai_vec.push_back(std::move(naujas_stud));
-                cout << "Dar vienas? (t/n) "; cin >> testi;
-            } while (testi == 't' || testi == 'T');
-            failas = "manual_input";
         }
+        t_read = duration<double>(high_resolution_clock::now() - start_read).count();
+    } else {
+        if (useList) ivestiStudentus(studentai_list, ivestis);
+        else ivestiStudentus(studentai_vec, ivestis);
+        failas = "manual_input";
     }
 
     cout << "Pasirinkite galutinio balo skaiciavimo metoda:\n1 - Vidurkis\n2 - Mediana\n3 - Abu\nJusu pasirinkimas: ";
