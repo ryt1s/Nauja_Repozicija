@@ -5,37 +5,45 @@
 #include <iomanip>
 #include <cstdlib>
 #include <ctime>
-#include <limits> // Būtina ifstream valymui
+#include <limits>
+#include <random>
 
 using namespace std;
 
-void generuotiFaila(const string& filename, int kiekStudentu, int kiekNd) {
-    ofstream fout(filename);
+// Commit 2: Refaktoringas – generuotiFaila funkcija naudojant modernų C++ random
+void generuotiFaila(const std::string& filename, int kiekStudentu, int kiekNd) {
+    std::ofstream fout(filename);
     if (!fout) {
-        cerr << "Nepavyko sukurti failo: " << filename << endl;
+        std::cerr << "Nepavyko sukurti failo: " << filename << "\n";
         return;
     }
 
-    fout << setw(20) << left << "Pavarde"
-         << setw(20) << left << "Vardas";
+    fout << std::setw(20) << std::left << "Pavarde"
+         << std::setw(20) << std::left << "Vardas";
+
     for (int i = 1; i <= kiekNd; ++i)
-        fout << setw(5) << ("ND" + to_string(i));
-    fout << setw(10) << "Egzaminas" << "\n";
+        fout << std::setw(5) << ("ND" + std::to_string(i));
+
+    fout << std::setw(10) << "Egzaminas" << "\n";
+
+    std::mt19937 rng(static_cast<unsigned>(std::time(nullptr)));
+    std::uniform_int_distribution<int> dist(1, 10);
 
     for (int i = 1; i <= kiekStudentu; ++i) {
-        string pav = "Pavarde" + to_string(i);
-        string var = "Vardas" + to_string(i);
+        std::string pav = "Pavarde" + std::to_string(i);
+        std::string var = "Vardas" + std::to_string(i);
 
-        fout << setw(20) << left << pav
-             << setw(20) << left << var;
+        fout << std::setw(20) << std::left << pav
+             << std::setw(20) << std::left << var;
 
         for (int j = 0; j < kiekNd; ++j)
-            fout << setw(5) << (rand() % 10 + 1);
-        fout << setw(10) << (rand() % 10 + 1) << "\n";
+            fout << std::setw(5) << dist(rng);
+        fout << std::setw(10) << dist(rng) << "\n";
     }
 
     fout.close();
-    cout << "Sugeneruotas failas: " << filename << " (" << kiekStudentu << " irasu)\n";
+    std::cout << "Sugeneruotas failas: " << filename
+              << " (" << kiekStudentu << " irasu)\n";
 }
 
 // OPTIMIZUOTA NUSKAITYMO FUNKCIJA (vector)
