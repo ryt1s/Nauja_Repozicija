@@ -15,6 +15,90 @@
 using namespace std;
 using namespace chrono;
 
+enum class SplitStrategy { Copy = 1, Move = 2, Splice = 3 };
+
+template<typename Container>
+double rikiuoti(Container& studentai, int sortParam, int order) {
+    auto start = high_resolution_clock::now();
+
+    auto comp = [&](const Student& a, const Student& b) {
+        double left  = (sortParam == 2 ? a.galMed() : a.galVid());
+        double right = (sortParam == 2 ? b.galMed() : b.galVid());
+        return order == 1 ? left < right : left > right;
+    };
+
+    if constexpr (is_same_v<Container, list<Student>>)
+        studentai.sort(comp);
+    else
+        sort(studentai.begin(), studentai.end(), comp);
+
+    return duration<double>(high_resolution_clock::now() - start).count();
+}
+
+template<typename Container>
+double splitStudentus(Container& studentai,
+                      vector<Student>& vargsiukai,
+                      vector<Student>& kietiakai,
+                      SplitStrategy strategy,
+                      int sortParam) 
+{
+    auto start = high_resolution_clock::now();
+
+    auto isVargsiukas = [&](const Student& s) {
+        return (sortParam == 2 ? s.galMed() : s.galVid()) < 5.0;
+    };
+
+    vargsiukai.clear();
+    kietiakai.clear();
+
+    if constexpr (is_same_v<Container, list<Student>>) {
+        if (strategy == SplitStrategy::Copy) {
+            list<Student> good_students;
+            auto it = stable_partition(studentai.begin(), studentai.end(), isVargsiukas);
+            good_students.splice(good_students.begin(), studentai, it, studentai.end());
+
+            vargsiukai.assign(studentai.begin(), studentai.end());
+            kietiakai.assign(good_students.begin(), good_students.end());
+
+        } else if (strategy == SplitStrategy::Move) {
+            copy_if(studentai.begin(), studentai.end(), back_inserter(vargsiukai), isVargsiukas);
+            studentai.remove_if(isVargsiukas);
+            kietiakai.assign(make_move_iterator(studentai.begin()),
+                             make_move_iterator(studentai.end()));
+
+        } else {
+            list<Student> good_students;
+            auto it = stable_partition(studentai.begin(), studentai.end(), isVargsiukas);
+            good_students.splice(good_students.begin(), studentai, it, studentai.end());
+
+            vargsiukai.assign(make_move_iterator(studentai.begin()), 
+                              make_move_iterator(studentai.end()));
+            kietiakai.assign(make_move_iterator(good_students.begin()),
+                             make_move_iterator(good_students.end()));
+        }
+
+    } else {
+        if (strategy == SplitStrategy::Copy) {
+            auto it = stable_partition(studentai.begin(), studentai.end(), isVargsiukas);
+            vargsiukai.assign(studentai.begin(), it);
+            kietiakai.assign(it, studentai.end());
+
+        } else if (strategy == SplitStrategy::Move) {
+            copy_if(studentai.begin(), studentai.end(), back_inserter(vargsiukai), isVargsiukas);
+            studentai.erase(remove_if(studentai.begin(), studentai.end(), isVargsiukas), studentai.end());
+            kietiakai.assign(make_move_iterator(studentai.begin()), 
+                             make_move_iterator(studentai.end()));
+
+        } else {
+            auto it = partition(studentai.begin(), studentai.end(), isVargsiukas);
+            vargsiukai.assign(make_move_iterator(studentai.begin()), make_move_iterator(it));
+            kietiakai.assign(make_move_iterator(it), make_move_iterator(studentai.end()));
+        }
+    }
+
+    return duration<double>(high_resolution_clock::now() - start).count();
+}
+
 int main() {
     srand(static_cast<unsigned>(time(nullptr)));
 
@@ -68,7 +152,7 @@ int main() {
         cout << setprecision(2) << defaultfloat;
     };
 
-     auto ivestiStudentus = [](auto& studentai, int ivestis) {
+    auto ivestiStudentus = [](auto& studentai, int ivestis) {
         char testi;
         do {
             string vardas, pavarde;
@@ -106,11 +190,8 @@ int main() {
     if (ivestis == 3) {
         cout << "Iveskite failo pavadinima: "; cin >> failas;
         auto start_read = high_resolution_clock::now();
-        if (useList) {
-            nuskaitytiIsFailo(failas, studentai_list);
-        } else {
-            nuskaitytiIsFailo(failas, studentai_vec);
-        }
+        if (useList) nuskaitytiIsFailo(failas, studentai_list);
+        else nuskaitytiIsFailo(failas, studentai_vec);
         t_read = duration<double>(high_resolution_clock::now() - start_read).count();
     } else {
         if (useList) ivestiStudentus(studentai_list, ivestis);
@@ -120,7 +201,6 @@ int main() {
 
     cout << "Pasirinkite galutinio balo skaiciavimo metoda:\n1 - Vidurkis\n2 - Mediana\n3 - Abu\nJusu pasirinkimas: ";
     cin >> metod;
-
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     if (metod == 3) {
@@ -137,71 +217,17 @@ int main() {
     cout << "Jusu pasirinkimas: ";
     int splitStrategy;
     cin >> splitStrategy;
+--
+    t_sort = useList 
+             ? rikiuoti(studentai_list, sortParam, order)
+             : rikiuoti(studentai_vec, sortParam, order);
 
-    auto isVargsiukas = [&](const Student& s) {
-        return (sortParam == 2 ? s.galMed() : s.galVid()) < 5.0;
-    };
-
-    if (useList) {
-        auto start_sort = high_resolution_clock::now();
-        studentai_list.sort([&](const Student &a, const Student &b){
-            double left = (sortParam == 2 ? a.galMed() : a.galVid());
-            double right = (sortParam == 2 ? b.galMed() : b.galVid());
-            return order == 1 ? left < right : left > right;
-        });
-        t_sort = duration<double>(high_resolution_clock::now() - start_sort).count();
-    } else {
-        auto start_sort = high_resolution_clock::now();
-        sort(studentai_vec.begin(), studentai_vec.end(), [&](const Student &a, const Student &b) {
-            double left = (sortParam == 2 ? a.galMed() : a.galVid());
-            double right = (sortParam == 2 ? b.galMed() : b.galVid());
-            return order == 1 ? left < right : left > right;
-        });
-        t_sort = duration<double>(high_resolution_clock::now() - start_sort).count();
-    }
     cout << "Rikiavimas: "; printTime(t_sort); cout << "\n";
 
-    auto start_split = high_resolution_clock::now();
-    vargsiukai.clear();
-    kietiakai.clear();
+    t_split = useList
+              ? splitStudentus(studentai_list, vargsiukai, kietiakai, static_cast<SplitStrategy>(splitStrategy), sortParam)
+              : splitStudentus(studentai_vec, vargsiukai, kietiakai, static_cast<SplitStrategy>(splitStrategy), sortParam);
 
-    if (useList) {
-        if (splitStrategy == 1) {
-            list<Student> good_students;
-            auto it = stable_partition(studentai_list.begin(), studentai_list.end(), isVargsiukas);
-            good_students.splice(good_students.begin(), studentai_list, it, studentai_list.end());
-
-            vargsiukai.assign(studentai_list.begin(), studentai_list.end());
-            kietiakai.assign(good_students.begin(), good_students.end());
-        } else if (splitStrategy == 2) {
-            copy_if(studentai_list.begin(), studentai_list.end(), back_inserter(vargsiukai), isVargsiukas);
-            studentai_list.remove_if(isVargsiukas);
-            kietiakai.assign(make_move_iterator(studentai_list.begin()), make_move_iterator(studentai_list.end()));
-        } else {
-            list<Student> good_students;
-            auto it = stable_partition(studentai_list.begin(), studentai_list.end(), isVargsiukas);
-            good_students.splice(good_students.begin(), studentai_list, it, studentai_list.end());
-            vargsiukai.assign(make_move_iterator(studentai_list.begin()), make_move_iterator(studentai_list.end()));
-            kietiakai.assign(make_move_iterator(good_students.begin()), make_move_iterator(good_students.end()));
-        }
-    } else {
-        if (splitStrategy == 1) {
-            auto it = stable_partition(studentai_vec.begin(), studentai_vec.end(), isVargsiukas);
-            vargsiukai.assign(studentai_vec.begin(), it);
-            kietiakai.assign(it, studentai_vec.end());
-        } else if (splitStrategy == 2) {
-            copy_if(studentai_vec.begin(), studentai_vec.end(), back_inserter(vargsiukai), isVargsiukas);
-            studentai_vec.erase(remove_if(studentai_vec.begin(), studentai_vec.end(), isVargsiukas), studentai_vec.end());
-            kietiakai.assign(make_move_iterator(studentai_vec.begin()), make_move_iterator(studentai_vec.end()));
-        } else {
-            auto it = partition(studentai_vec.begin(), studentai_vec.end(), isVargsiukas);
-            vargsiukai.assign(make_move_iterator(studentai_vec.begin()), make_move_iterator(it));
-            kietiakai.assign(make_move_iterator(it), make_move_iterator(studentai_vec.end()));
-        }
-    }
-
-    auto end_split = high_resolution_clock::now();
-    t_split = duration<double>(end_split - start_split).count();
     cout << "Skirstymas i grupes: "; printTime(t_split); cout << "\n";
 
     auto start_write = high_resolution_clock::now();

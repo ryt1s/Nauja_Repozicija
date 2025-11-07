@@ -1,209 +1,209 @@
-Pavarde                  Vardas                   Galutinis (Vid.)Galutinis (Med.)
-Pavarde657                Vardas657                            1.72            1.80
-Pavarde203                Vardas203                            2.04            1.80
-Pavarde313                Vardas313                            2.12            1.80
-Pavarde921                Vardas921                            2.12            2.20
-Pavarde635                Vardas635                            2.12            1.80
-Pavarde791                Vardas791                            2.12            1.80
-Pavarde101                Vardas101                            2.20            2.20
-Pavarde611                Vardas611                            2.28            2.20
-Pavarde361                Vardas361                            2.28            2.20
-Pavarde419                Vardas419                            2.28            1.80
-Pavarde131                Vardas131                            2.36            3.00
-Pavarde631                Vardas631                            2.44            1.80
-Pavarde73                 Vardas73                             2.44            2.60
-Pavarde443                Vardas443                            2.44            2.20
-Pavarde503                Vardas503                            2.44            2.20
-Pavarde697                Vardas697                            2.48            2.40
-Pavarde619                Vardas619                            2.52            2.20
-Pavarde217                Vardas217                            2.52            2.20
-Pavarde19                 Vardas19                             2.52            2.20
-Pavarde459                Vardas459                            2.56            2.40
-Pavarde845                Vardas845                            2.56            2.80
-Pavarde699                Vardas699                            2.60            2.60
-Pavarde859                Vardas859                            2.60            2.60
-Pavarde243                Vardas243                            2.60            2.20
-Pavarde627                Vardas627                            2.64            2.40
-Pavarde793                Vardas793                            2.68            3.00
-Pavarde705                Vardas705                            2.68            2.20
-Pavarde935                Vardas935                            2.68            2.20
-Pavarde491                Vardas491                            2.72            2.40
-Pavarde71                 Vardas71                             2.72            2.40
-Pavarde945                Vardas945                            2.72            2.40
-Pavarde883                Vardas883                            2.72            2.80
-Pavarde811                Vardas811                            2.76            2.60
-Pavarde783                Vardas783                            2.76            2.60
-Pavarde321                Vardas321                            2.80            2.40
-Pavarde135                Vardas135                            2.80            2.40
-Pavarde295                Vardas295                            2.84            3.00
-Pavarde955                Vardas955                            2.84            2.60
-Pavarde241                Vardas241                            2.84            3.00
-Pavarde595                Vardas595                            2.88            2.80
-Pavarde907                Vardas907                            2.88            3.20
-Pavarde521                Vardas521                            2.88            3.20
-Pavarde379                Vardas379                            2.92            2.20
-Pavarde553                Vardas553                            2.92            2.60
-Pavarde795                Vardas795                            2.92            2.60
-Pavarde753                Vardas753                            2.92            2.20
-Pavarde879                Vardas879                            2.96            3.20
-Pavarde63                 Vardas63                             2.96            2.80
-Pavarde525                Vardas525                            2.96            2.80
-Pavarde129                Vardas129                            3.00            3.00
-Pavarde151                Vardas151                            3.04            2.80
-Pavarde975                Vardas975                            3.04            2.80
-Pavarde449                Vardas449                            3.08            3.00
-Pavarde11                 Vardas11                             3.08            3.80
-Pavarde477                Vardas477                            3.08            4.20
-Pavarde829                Vardas829                            3.12            3.20
-Pavarde305                Vardas305                            3.16            2.60
-Pavarde183                Vardas183                            3.20            3.60
-Pavarde199                Vardas199                            3.20            2.80
-Pavarde421                Vardas421                            3.24            3.00
-Pavarde487                Vardas487                            3.28            3.60
-Pavarde143                Vardas143                            3.28            3.60
-Pavarde137                Vardas137                            3.28            2.80
-Pavarde825                Vardas825                            3.28            3.60
-Pavarde281                Vardas281                            3.28            3.20
-Pavarde569                Vardas569                            3.32            2.60
-Pavarde413                Vardas413                            3.32            3.00
-Pavarde953                Vardas953                            3.32            3.80
-Pavarde703                Vardas703                            3.32            3.40
-Pavarde843                Vardas843                            3.36            2.80
-Pavarde943                Vardas943                            3.36            3.60
-Pavarde89                 Vardas89                             3.36            3.20
-Pavarde959                Vardas959                            3.36            3.60
-Pavarde761                Vardas761                            3.36            3.60
-Pavarde467                Vardas467                            3.44            3.20
-Pavarde27                 Vardas27                             3.44            3.60
-Pavarde371                Vardas371                            3.44            3.20
-Pavarde61                 Vardas61                             3.44            3.60
-Pavarde301                Vardas301                            3.48            3.00
-Pavarde195                Vardas195                            3.48            3.40
-Pavarde713                Vardas713                            3.48            4.20
-Pavarde285                Vardas285                            3.56            3.40
-Pavarde447                Vardas447                            3.56            3.00
-Pavarde95                 Vardas95                             3.56            3.80
-Pavarde889                Vardas889                            3.60            4.40
-Pavarde911                Vardas911                            3.60            3.60
-Pavarde375                Vardas375                            3.60            3.60
-Pavarde995                Vardas995                            3.60            4.40
-Pavarde743                Vardas743                            3.60            4.00
-Pavarde145                Vardas145                            3.60            3.60
-Pavarde773                Vardas773                            3.60            4.00
-Pavarde337                Vardas337                            3.64            3.40
-Pavarde479                Vardas479                            3.64            3.80
-Pavarde957                Vardas957                            3.64            3.40
-Pavarde651                Vardas651                            3.64            3.80
-Pavarde913                Vardas913                            3.64            3.80
-Pavarde331                Vardas331                            3.68            3.60
-Pavarde153                Vardas153                            3.68            3.60
-Pavarde665                Vardas665                            3.68            3.60
-Pavarde833                Vardas833                            3.68            4.00
-Pavarde623                Vardas623                            3.72            3.00
-Pavarde949                Vardas949                            3.72            3.40
-Pavarde785                Vardas785                            3.72            4.20
-Pavarde875                Vardas875                            3.72            3.80
-Pavarde383                Vardas383                            3.72            3.80
-Pavarde591                Vardas591                            3.76            3.60
-Pavarde557                Vardas557                            3.76            3.60
-Pavarde461                Vardas461                            3.76            3.20
-Pavarde273                Vardas273                            3.76            3.20
-Pavarde1                  Vardas1                              3.80            3.80
-Pavarde349                Vardas349                            3.80            3.80
-Pavarde93                 Vardas93                             3.80            3.80
-Pavarde437                Vardas437                            3.84            4.00
-Pavarde763                Vardas763                            3.84            4.00
-Pavarde499                Vardas499                            3.88            3.80
-Pavarde411                Vardas411                            3.88            4.20
-Pavarde397                Vardas397                            3.88            3.80
-Pavarde807                Vardas807                            3.92            4.00
-Pavarde529                Vardas529                            3.92            4.00
-Pavarde5                  Vardas5                              3.92            4.00
-Pavarde969                Vardas969                            3.96            4.20
-Pavarde607                Vardas607                            3.96            3.80
-Pavarde431                Vardas431                            3.96            3.40
-Pavarde867                Vardas867                            3.96            4.20
-Pavarde17                 Vardas17                             4.00            3.20
-Pavarde927                Vardas927                            4.00            3.20
-Pavarde355                Vardas355                            4.00            3.60
-Pavarde985                Vardas985                            4.00            4.00
-Pavarde539                Vardas539                            4.00            4.40
-Pavarde685                Vardas685                            4.04            3.80
-Pavarde603                Vardas603                            4.04            4.60
-Pavarde45                 Vardas45                             4.08            4.00
-Pavarde647                Vardas647                            4.08            4.00
-Pavarde251                Vardas251                            4.12            4.20
-Pavarde365                Vardas365                            4.12            4.20
-Pavarde219                Vardas219                            4.12            4.20
-Pavarde429                Vardas429                            4.16            3.60
-Pavarde689                Vardas689                            4.16            3.60
-Pavarde439                Vardas439                            4.20            4.20
-Pavarde587                Vardas587                            4.20            4.60
-Pavarde53                 Vardas53                             4.20            4.20
-Pavarde123                Vardas123                            4.20            3.80
-Pavarde523                Vardas523                            4.24            4.40
-Pavarde193                Vardas193                            4.24            4.80
-Pavarde961                Vardas961                            4.24            4.80
-Pavarde625                Vardas625                            4.24            3.60
-Pavarde849                Vardas849                            4.28            3.80
-Pavarde733                Vardas733                            4.28            3.40
-Pavarde789                Vardas789                            4.28            4.60
-Pavarde515                Vardas515                            4.28            4.60
-Pavarde659                Vardas659                            4.28            3.40
-Pavarde735                Vardas735                            4.32            5.20
-Pavarde601                Vardas601                            4.32            4.40
-Pavarde57                 Vardas57                             4.32            4.40
-Pavarde489                Vardas489                            4.36            5.00
-Pavarde329                Vardas329                            4.36            4.60
-Pavarde85                 Vardas85                             4.36            4.60
-Pavarde335                Vardas335                            4.36            4.20
-Pavarde275                Vardas275                            4.36            4.60
-Pavarde725                Vardas725                            4.40            4.80
-Pavarde377                Vardas377                            4.40            5.20
-Pavarde157                Vardas157                            4.44            4.60
-Pavarde83                 Vardas83                             4.44            5.00
-Pavarde173                Vardas173                            4.44            5.00
-Pavarde555                Vardas555                            4.48            4.40
-Pavarde895                Vardas895                            4.48            4.40
-Pavarde91                 Vardas91                             4.48            4.40
-Pavarde75                 Vardas75                             4.48            4.00
-Pavarde669                Vardas669                            4.52            4.60
-Pavarde77                 Vardas77                             4.52            5.00
-Pavarde559                Vardas559                            4.52            4.60
-Pavarde677                Vardas677                            4.56            4.00
-Pavarde415                Vardas415                            4.56            4.80
-Pavarde779                Vardas779                            4.56            4.80
-Pavarde115                Vardas115                            4.56            4.80
-Pavarde915                Vardas915                            4.60            4.20
-Pavarde853                Vardas853                            4.60            4.60
-Pavarde571                Vardas571                            4.60            4.60
-Pavarde639                Vardas639                            4.60            4.60
-Pavarde767                Vardas767                            4.64            4.40
-Pavarde109                Vardas109                            4.64            4.80
-Pavarde667                Vardas667                            4.64            4.40
-Pavarde65                 Vardas65                             4.64            4.80
-Pavarde293                Vardas293                            4.64            4.80
-Pavarde403                Vardas403                            4.68            4.20
-Pavarde645                Vardas645                            4.68            4.60
-Pavarde837                Vardas837                            4.72            4.80
-Pavarde599                Vardas599                            4.72            4.40
-Pavarde81                 Vardas81                             4.72            4.80
-Pavarde747                Vardas747                            4.76            4.20
-Pavarde729                Vardas729                            4.76            4.60
-Pavarde345                Vardas345                            4.76            4.60
-Pavarde609                Vardas609                            4.76            4.60
-Pavarde395                Vardas395                            4.76            4.20
-Pavarde239                Vardas239                            4.80            4.80
-Pavarde519                Vardas519                            4.80            4.80
-Pavarde777                Vardas777                            4.80            4.80
-Pavarde469                Vardas469                            4.84            5.00
-Pavarde629                Vardas629                            4.88            4.80
-Pavarde535                Vardas535                            4.88            4.80
-Pavarde965                Vardas965                            4.88            5.20
-Pavarde827                Vardas827                            4.92            4.20
-Pavarde465                Vardas465                            4.92            5.00
-Pavarde905                Vardas905                            4.92            4.60
-Pavarde751                Vardas751                            4.92            5.40
-Pavarde869                Vardas869                            4.96            4.80
-Pavarde401                Vardas401                            4.96            6.00
-Pavarde759                Vardas759                            4.96            5.20
+Pavarde                  Vardas                   Galutinis      
+Pavarde657                Vardas657                            1.72
+Pavarde203                Vardas203                            2.04
+Pavarde313                Vardas313                            2.12
+Pavarde635                Vardas635                            2.12
+Pavarde791                Vardas791                            2.12
+Pavarde921                Vardas921                            2.12
+Pavarde101                Vardas101                            2.20
+Pavarde361                Vardas361                            2.28
+Pavarde419                Vardas419                            2.28
+Pavarde611                Vardas611                            2.28
+Pavarde131                Vardas131                            2.36
+Pavarde73                 Vardas73                             2.44
+Pavarde443                Vardas443                            2.44
+Pavarde503                Vardas503                            2.44
+Pavarde631                Vardas631                            2.44
+Pavarde697                Vardas697                            2.48
+Pavarde19                 Vardas19                             2.52
+Pavarde217                Vardas217                            2.52
+Pavarde619                Vardas619                            2.52
+Pavarde459                Vardas459                            2.56
+Pavarde845                Vardas845                            2.56
+Pavarde243                Vardas243                            2.60
+Pavarde699                Vardas699                            2.60
+Pavarde859                Vardas859                            2.60
+Pavarde627                Vardas627                            2.64
+Pavarde705                Vardas705                            2.68
+Pavarde793                Vardas793                            2.68
+Pavarde935                Vardas935                            2.68
+Pavarde71                 Vardas71                             2.72
+Pavarde491                Vardas491                            2.72
+Pavarde883                Vardas883                            2.72
+Pavarde945                Vardas945                            2.72
+Pavarde783                Vardas783                            2.76
+Pavarde811                Vardas811                            2.76
+Pavarde135                Vardas135                            2.80
+Pavarde321                Vardas321                            2.80
+Pavarde241                Vardas241                            2.84
+Pavarde295                Vardas295                            2.84
+Pavarde955                Vardas955                            2.84
+Pavarde521                Vardas521                            2.88
+Pavarde595                Vardas595                            2.88
+Pavarde907                Vardas907                            2.88
+Pavarde379                Vardas379                            2.92
+Pavarde553                Vardas553                            2.92
+Pavarde753                Vardas753                            2.92
+Pavarde795                Vardas795                            2.92
+Pavarde63                 Vardas63                             2.96
+Pavarde525                Vardas525                            2.96
+Pavarde879                Vardas879                            2.96
+Pavarde129                Vardas129                            3.00
+Pavarde151                Vardas151                            3.04
+Pavarde975                Vardas975                            3.04
+Pavarde449                Vardas449                            3.08
+Pavarde11                 Vardas11                             3.08
+Pavarde477                Vardas477                            3.08
+Pavarde829                Vardas829                            3.12
+Pavarde305                Vardas305                            3.16
+Pavarde183                Vardas183                            3.20
+Pavarde199                Vardas199                            3.20
+Pavarde421                Vardas421                            3.24
+Pavarde137                Vardas137                            3.28
+Pavarde143                Vardas143                            3.28
+Pavarde281                Vardas281                            3.28
+Pavarde487                Vardas487                            3.28
+Pavarde825                Vardas825                            3.28
+Pavarde569                Vardas569                            3.32
+Pavarde413                Vardas413                            3.32
+Pavarde703                Vardas703                            3.32
+Pavarde953                Vardas953                            3.32
+Pavarde89                 Vardas89                             3.36
+Pavarde761                Vardas761                            3.36
+Pavarde843                Vardas843                            3.36
+Pavarde943                Vardas943                            3.36
+Pavarde959                Vardas959                            3.36
+Pavarde27                 Vardas27                             3.44
+Pavarde61                 Vardas61                             3.44
+Pavarde371                Vardas371                            3.44
+Pavarde467                Vardas467                            3.44
+Pavarde195                Vardas195                            3.48
+Pavarde301                Vardas301                            3.48
+Pavarde713                Vardas713                            3.48
+Pavarde285                Vardas285                            3.56
+Pavarde447                Vardas447                            3.56
+Pavarde95                 Vardas95                             3.56
+Pavarde145                Vardas145                            3.60
+Pavarde375                Vardas375                            3.60
+Pavarde743                Vardas743                            3.60
+Pavarde773                Vardas773                            3.60
+Pavarde889                Vardas889                            3.60
+Pavarde911                Vardas911                            3.60
+Pavarde995                Vardas995                            3.60
+Pavarde337                Vardas337                            3.64
+Pavarde479                Vardas479                            3.64
+Pavarde957                Vardas957                            3.64
+Pavarde651                Vardas651                            3.64
+Pavarde913                Vardas913                            3.64
+Pavarde153                Vardas153                            3.68
+Pavarde331                Vardas331                            3.68
+Pavarde665                Vardas665                            3.68
+Pavarde833                Vardas833                            3.68
+Pavarde623                Vardas623                            3.72
+Pavarde785                Vardas785                            3.72
+Pavarde949                Vardas949                            3.72
+Pavarde383                Vardas383                            3.72
+Pavarde875                Vardas875                            3.72
+Pavarde273                Vardas273                            3.76
+Pavarde461                Vardas461                            3.76
+Pavarde557                Vardas557                            3.76
+Pavarde591                Vardas591                            3.76
+Pavarde1                  Vardas1                              3.80
+Pavarde93                 Vardas93                             3.80
+Pavarde349                Vardas349                            3.80
+Pavarde437                Vardas437                            3.84
+Pavarde763                Vardas763                            3.84
+Pavarde397                Vardas397                            3.88
+Pavarde411                Vardas411                            3.88
+Pavarde499                Vardas499                            3.88
+Pavarde5                  Vardas5                              3.92
+Pavarde529                Vardas529                            3.92
+Pavarde807                Vardas807                            3.92
+Pavarde431                Vardas431                            3.96
+Pavarde607                Vardas607                            3.96
+Pavarde867                Vardas867                            3.96
+Pavarde969                Vardas969                            3.96
+Pavarde17                 Vardas17                             4.00
+Pavarde355                Vardas355                            4.00
+Pavarde539                Vardas539                            4.00
+Pavarde927                Vardas927                            4.00
+Pavarde985                Vardas985                            4.00
+Pavarde603                Vardas603                            4.04
+Pavarde685                Vardas685                            4.04
+Pavarde45                 Vardas45                             4.08
+Pavarde647                Vardas647                            4.08
+Pavarde219                Vardas219                            4.12
+Pavarde251                Vardas251                            4.12
+Pavarde365                Vardas365                            4.12
+Pavarde429                Vardas429                            4.16
+Pavarde689                Vardas689                            4.16
+Pavarde53                 Vardas53                             4.20
+Pavarde123                Vardas123                            4.20
+Pavarde439                Vardas439                            4.20
+Pavarde587                Vardas587                            4.20
+Pavarde193                Vardas193                            4.24
+Pavarde523                Vardas523                            4.24
+Pavarde625                Vardas625                            4.24
+Pavarde961                Vardas961                            4.24
+Pavarde515                Vardas515                            4.28
+Pavarde659                Vardas659                            4.28
+Pavarde733                Vardas733                            4.28
+Pavarde789                Vardas789                            4.28
+Pavarde849                Vardas849                            4.28
+Pavarde57                 Vardas57                             4.32
+Pavarde601                Vardas601                            4.32
+Pavarde735                Vardas735                            4.32
+Pavarde85                 Vardas85                             4.36
+Pavarde275                Vardas275                            4.36
+Pavarde329                Vardas329                            4.36
+Pavarde335                Vardas335                            4.36
+Pavarde489                Vardas489                            4.36
+Pavarde377                Vardas377                            4.40
+Pavarde725                Vardas725                            4.40
+Pavarde83                 Vardas83                             4.44
+Pavarde157                Vardas157                            4.44
+Pavarde173                Vardas173                            4.44
+Pavarde75                 Vardas75                             4.48
+Pavarde91                 Vardas91                             4.48
+Pavarde555                Vardas555                            4.48
+Pavarde895                Vardas895                            4.48
+Pavarde77                 Vardas77                             4.52
+Pavarde559                Vardas559                            4.52
+Pavarde669                Vardas669                            4.52
+Pavarde115                Vardas115                            4.56
+Pavarde415                Vardas415                            4.56
+Pavarde677                Vardas677                            4.56
+Pavarde779                Vardas779                            4.56
+Pavarde571                Vardas571                            4.60
+Pavarde639                Vardas639                            4.60
+Pavarde853                Vardas853                            4.60
+Pavarde915                Vardas915                            4.60
+Pavarde65                 Vardas65                             4.64
+Pavarde109                Vardas109                            4.64
+Pavarde293                Vardas293                            4.64
+Pavarde667                Vardas667                            4.64
+Pavarde767                Vardas767                            4.64
+Pavarde403                Vardas403                            4.68
+Pavarde645                Vardas645                            4.68
+Pavarde81                 Vardas81                             4.72
+Pavarde599                Vardas599                            4.72
+Pavarde837                Vardas837                            4.72
+Pavarde345                Vardas345                            4.76
+Pavarde395                Vardas395                            4.76
+Pavarde609                Vardas609                            4.76
+Pavarde729                Vardas729                            4.76
+Pavarde747                Vardas747                            4.76
+Pavarde239                Vardas239                            4.80
+Pavarde519                Vardas519                            4.80
+Pavarde777                Vardas777                            4.80
+Pavarde469                Vardas469                            4.84
+Pavarde629                Vardas629                            4.88
+Pavarde535                Vardas535                            4.88
+Pavarde965                Vardas965                            4.88
+Pavarde465                Vardas465                            4.92
+Pavarde751                Vardas751                            4.92
+Pavarde827                Vardas827                            4.92
+Pavarde905                Vardas905                            4.92
+Pavarde401                Vardas401                            4.96
+Pavarde759                Vardas759                            4.96
+Pavarde869                Vardas869                            4.96
