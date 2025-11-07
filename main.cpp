@@ -10,13 +10,13 @@
 #include <iomanip>
 #include <limits>
 #include <iterator>
+#include <sstream>
 
 using namespace std;
 using namespace chrono;
 
 int main() {
-
-    srand(time(0));
+    srand(static_cast<unsigned>(time(nullptr)));
 
     vector<Student> studentai_vec;
     list<Student> studentai_list;
@@ -29,10 +29,9 @@ int main() {
     useList = (containerChoice == 2);
     cout << "Naudojamas konteineris: " << (useList ? "std::list" : "std::vector") << "\n";
 
-
     cout << "Pasirinkite veiksma:" << endl;
-    cout << "1 - Ivesti / generuoti / nuskaityti studentus" << endl; 
-    cout << "2 - Sugeneruoti testinius failus" << endl; 
+    cout << "1 - Ivesti / generuoti / nuskaityti studentus" << endl;
+    cout << "2 - Sugeneruoti testinius failus" << endl;
     cout << "Jusu pasirinkimas: ";
     int pasirinkimas;
     cin >> pasirinkimas;
@@ -60,14 +59,14 @@ int main() {
     double t_read = 0.0, t_sort = 0.0, t_split = 0.0, t_write = 0.0;
 
     auto printTime = [](double seconds) {
-    cout << fixed << setprecision(6);
-    if (seconds < 0.5) {
-        cout << seconds * 1000 << " ms";
-    } else {
-        cout << seconds << " s";
-    }
-    cout << setprecision(2) << defaultfloat; 
-};
+        cout << fixed << setprecision(6);
+        if (seconds < 0.5) {
+            cout << seconds * 1000 << " ms";
+        } else {
+            cout << seconds << " s";
+        }
+        cout << setprecision(2) << defaultfloat;
+    };
 
     if (useList) {
         if (ivestis == 3) {
@@ -78,30 +77,36 @@ int main() {
         } else {
             char testi;
             do {
-                Student stud;
-                cout << "Vardas: "; cin >> stud.var;
-                cout << "Pavarde: "; cin >> stud.pav;
+                string vardas, pavarde;
+                vector<int> pazymiai;
+                int egzaminas = 0;
+
+                cout << "Vardas: "; cin >> vardas;
+                cout << "Pavarde: "; cin >> pavarde;
+
                 if (ivestis == 1) {
                     int laik;
                     while (true) {
                         laik = inputSkaicius("ND (0 baigti): ", 0, 10);
                         if (laik == 0) break;
-                        stud.paz.push_back(laik);
+                        pazymiai.push_back(laik);
                     }
-                    stud.egz = inputSkaicius("Egzaminas: ", 1, 10);
+                    egzaminas = inputSkaicius("Egzaminas: ", 1, 10);
                 } else {
                     int kiek = rand() % 10 + 1;
                     cout << "ND ivertinimai: ";
                     for (int i = 0; i < kiek; i++) {
                         int nd = rand() % 10 + 1;
-                        stud.paz.push_back(nd);
+                        pazymiai.push_back(nd);
                         cout << nd << " ";
                     }
-                    cout << "\nEgzamino ivertinimas: " << (stud.egz = rand() % 10 + 1) << endl;
+                    egzaminas = rand() % 10 + 1;
+                    cout << "\nEgzamino ivertinimas: " << egzaminas << endl;
                 }
-                skaiciuotiGalutinius(stud);
-                cout << "Objekto atminties adresas: " << &stud << endl;
-                studentai_list.push_back(stud);
+
+                Student naujas_stud(pavarde, vardas, pazymiai, egzaminas);
+                cout << "Objekto atminties adresas: " << &naujas_stud << endl;
+                studentai_list.push_back(std::move(naujas_stud));
                 cout << "Dar vienas? (t/n) "; cin >> testi;
             } while (testi == 't' || testi == 'T');
             failas = "manual_input";
@@ -115,30 +120,36 @@ int main() {
         } else {
             char testi;
             do {
-                Student stud;
-                cout << "Vardas: "; cin >> stud.var;
-                cout << "Pavarde: "; cin >> stud.pav;
-                 if (ivestis == 1) {
+                string vardas, pavarde;
+                vector<int> pazymiai;
+                int egzaminas = 0;
+
+                cout << "Vardas: "; cin >> vardas;
+                cout << "Pavarde: "; cin >> pavarde;
+
+                if (ivestis == 1) {
                     int laik;
                     while (true) {
                         laik = inputSkaicius("ND (0 baigti): ", 0, 10);
                         if (laik == 0) break;
-                        stud.paz.push_back(laik);
+                        pazymiai.push_back(laik);
                     }
-                    stud.egz = inputSkaicius("Egzaminas: ", 1, 10);
+                    egzaminas = inputSkaicius("Egzaminas: ", 1, 10);
                 } else {
                     int kiek = rand() % 10 + 1;
                     cout << "ND ivertinimai: ";
                     for (int i = 0; i < kiek; i++) {
                         int nd = rand() % 10 + 1;
-                        stud.paz.push_back(nd);
+                        pazymiai.push_back(nd);
                         cout << nd << " ";
                     }
-                    cout << "\nEgzamino ivertinimas: " << (stud.egz = rand() % 10 + 1) << endl;
+                    egzaminas = rand() % 10 + 1;
+                    cout << "\nEgzamino ivertinimas: " << egzaminas << endl;
                 }
-                skaiciuotiGalutinius(stud);
-                cout << "Objekto atminties adresas: " << &stud << endl;
-                studentai_vec.push_back(stud);
+
+                Student naujas_stud(pavarde, vardas, pazymiai, egzaminas);
+                cout << "Objekto atminties adresas: " << &naujas_stud << endl;
+                studentai_vec.push_back(std::move(naujas_stud));
                 cout << "Dar vienas? (t/n) "; cin >> testi;
             } while (testi == 't' || testi == 'T');
             failas = "manual_input";
@@ -164,35 +175,35 @@ int main() {
     cout << "Jusu pasirinkimas: ";
     int splitStrategy;
     cin >> splitStrategy;
+
     auto isVargsiukas = [&](const Student& s) {
-        return (sortParam == 2 ? s.galMed : s.galVid) < 5.0;
+        return (sortParam == 2 ? s.galMed() : s.galVid()) < 5.0;
     };
 
     if (useList) {
         auto start_sort = high_resolution_clock::now();
         studentai_list.sort([&](const Student &a, const Student &b){
-            double left = (sortParam == 2 ? a.galMed : a.galVid);
-            double right = (sortParam == 2 ? b.galMed : b.galVid);
+            double left = (sortParam == 2 ? a.galMed() : a.galVid());
+            double right = (sortParam == 2 ? b.galMed() : b.galVid());
             return order == 1 ? left < right : left > right;
         });
         t_sort = duration<double>(high_resolution_clock::now() - start_sort).count();
     } else {
         auto start_sort = high_resolution_clock::now();
         sort(studentai_vec.begin(), studentai_vec.end(), [&](const Student &a, const Student &b) {
-            double left = (sortParam == 2 ? a.galMed : a.galVid);
-            double right = (sortParam == 2 ? b.galMed : b.galVid);
+            double left = (sortParam == 2 ? a.galMed() : a.galVid());
+            double right = (sortParam == 2 ? b.galMed() : b.galVid());
             return order == 1 ? left < right : left > right;
         });
         t_sort = duration<double>(high_resolution_clock::now() - start_sort).count();
     }
-    cout << "Rikiavimas: " << t_sort << " s\n";
+    cout << "Rikiavimas: "; printTime(t_sort); cout << "\n";
 
     auto start_split = high_resolution_clock::now();
     vargsiukai.clear();
     kietiakai.clear();
 
     if (useList) {
-
         if (splitStrategy == 1) {
             list<Student> good_students;
             auto it = stable_partition(studentai_list.begin(), studentai_list.end(), isVargsiukas);
@@ -200,40 +211,28 @@ int main() {
 
             vargsiukai.assign(studentai_list.begin(), studentai_list.end());
             kietiakai.assign(good_students.begin(), good_students.end());
-        }
-
-        else if (splitStrategy == 2) {
+        } else if (splitStrategy == 2) {
             copy_if(studentai_list.begin(), studentai_list.end(), back_inserter(vargsiukai), isVargsiukas);
-            
-            studentai_list.remove_if(isVargsiukas); 
-            
+            studentai_list.remove_if(isVargsiukas);
             kietiakai.assign(make_move_iterator(studentai_list.begin()), make_move_iterator(studentai_list.end()));
         } else {
             list<Student> good_students;
             auto it = stable_partition(studentai_list.begin(), studentai_list.end(), isVargsiukas);
-            
-            good_students.splice(good_students.begin(), studentai_list, it, studentai_list.end()); 
-            
+            good_students.splice(good_students.begin(), studentai_list, it, studentai_list.end());
             vargsiukai.assign(make_move_iterator(studentai_list.begin()), make_move_iterator(studentai_list.end()));
             kietiakai.assign(make_move_iterator(good_students.begin()), make_move_iterator(good_students.end()));
         }
-
     } else {
         if (splitStrategy == 1) {
             auto it = stable_partition(studentai_vec.begin(), studentai_vec.end(), isVargsiukas);
-
             vargsiukai.assign(studentai_vec.begin(), it);
             kietiakai.assign(it, studentai_vec.end());
-        } 
-        else if (splitStrategy == 2) {
+        } else if (splitStrategy == 2) {
             copy_if(studentai_vec.begin(), studentai_vec.end(), back_inserter(vargsiukai), isVargsiukas);
-            
             studentai_vec.erase(remove_if(studentai_vec.begin(), studentai_vec.end(), isVargsiukas), studentai_vec.end());
-            
             kietiakai.assign(make_move_iterator(studentai_vec.begin()), make_move_iterator(studentai_vec.end()));
         } else {
             auto it = partition(studentai_vec.begin(), studentai_vec.end(), isVargsiukas);
-                  
             vargsiukai.assign(make_move_iterator(studentai_vec.begin()), make_move_iterator(it));
             kietiakai.assign(make_move_iterator(it), make_move_iterator(studentai_vec.end()));
         }
@@ -241,14 +240,14 @@ int main() {
 
     auto end_split = high_resolution_clock::now();
     t_split = duration<double>(end_split - start_split).count();
-    cout << "Skirstymas i grupes: " << t_split << " s\n";
+    cout << "Skirstymas i grupes: "; printTime(t_split); cout << "\n";
 
     auto start_write = high_resolution_clock::now();
     issaugotiIFaila("vargsiukai.txt", vargsiukai, metod);
     issaugotiIFaila("kietiakai.txt", kietiakai, metod);
     auto end_write = high_resolution_clock::now();
     t_write = duration<double>(end_write - start_write).count();
-    cout << "Isvedimas i failus: " << t_write << " s\n";
+    cout << "Isvedimas i failus: "; printTime(t_write); cout << "\n";
 
     string metricStr = (sortParam == 1) ? "Vidurkis" : "Mediana";
     string orderStr = (order == 1) ? "Didejimo tvarka" : "Mazejimo tvarka";

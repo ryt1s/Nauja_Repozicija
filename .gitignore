@@ -46,3 +46,4 @@ data/
 build/
 kursiokai.txt
 .vscode/
+main_temp.cpp
