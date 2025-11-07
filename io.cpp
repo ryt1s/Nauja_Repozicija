@@ -10,7 +10,6 @@
 
 using namespace std;
 
-// Commit 2: Refaktoringas – generuotiFaila funkcija naudojant modernų C++ random
 void generuotiFaila(const std::string& filename, int kiekStudentu, int kiekNd) {
     std::ofstream fout(filename);
     if (!fout) {
@@ -46,52 +45,29 @@ void generuotiFaila(const std::string& filename, int kiekStudentu, int kiekNd) {
               << " (" << kiekStudentu << " irasu)\n";
 }
 
-// OPTIMIZUOTA NUSKAITYMO FUNKCIJA (vector)
-void nuskaitytiIsFailo(const string& filename, vector<Student>& studentai) {
-    ifstream fin(filename);
-    if (!fin) {
-        cerr << "Nepavyko atidaryti failo: " << filename << endl;
-        return;
-    }
-
-    string header;
-    getline(fin, header); 
+template<typename Container>
+void nuskaitytiIsFailoTemplate(const std::string& filename, Container& studentai) {
+    std::ifstream fin(filename);
+    if (!fin) { std::cerr << "Nepavyko atidaryti failo: " << filename << "\n"; return; }
     
-    // Nuskaitoma tiesiai iš failo srauto (fin), išvengiant tarpinio std::string
+    std::string header;
+    std::getline(fin, header);
+
     while (fin.peek() != EOF) {
-        Student stud; 
-        stud.readStudent(fin); 
-        
-        // Būtina, kad praleistų likusią eilutės dalį (įskaitant \n)
-        fin.ignore(numeric_limits<streamsize>::max(), '\n');
-        
-        if (!stud.pav().empty()) { 
+        Student stud;
+        stud.readStudent(fin);
+        fin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if (!stud.pav().empty())
             studentai.push_back(std::move(stud));
-        }
     }
 }
 
-// OPTIMIZUOTA NUSKAITYMO FUNKCIJA (list)
-void nuskaitytiIsFailo(const string& filename, list<Student>& studentai) {
-    ifstream fin(filename);
-    if (!fin) {
-        cerr << "Nepavyko atidaryti failo: " << filename << endl;
-        return;
-    }
+void nuskaitytiIsFailo(const std::string& filename, std::vector<Student>& studentai) {
+    nuskaitytiIsFailoTemplate(filename, studentai);
+}
 
-    string header;
-    getline(fin, header); 
-
-    while (fin.peek() != EOF) {
-        Student stud; 
-        stud.readStudent(fin); 
-        
-        fin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-        if (!stud.pav().empty()) {
-            studentai.push_back(std::move(stud)); 
-        }
-    }
+void nuskaitytiIsFailo(const std::string& filename, std::list<Student>& studentai) {
+    nuskaitytiIsFailoTemplate(filename, studentai);
 }
 
 void issaugotiIFaila(const string& filename, const vector<Student>& students, int metod) {
