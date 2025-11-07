@@ -26,7 +26,7 @@ Atliekant ankstesnės (Struct) ir dabartinės (Class) realizacijos palyginimą, 
 
 
 
-## Eksperimentinė analizė – optimizacijos flag'ai
+## Eksperimentinė analizė – 10 000 000 įrašų su optimizacijos flag’ais
 
 ### 1. Naudojant Class duomenų tipą
 
@@ -44,4 +44,8 @@ Atliekant ankstesnės (Struct) ir dabartinės (Class) realizacijos palyginimą, 
 | vector      | Struct        | O2           | 12.283420       | 2.391692       | 0.433014      | 9.585143       | 24.693269           |
 | vector      | Struct        | O3           | 12.953310       | 2.196825       | 0.348954      | 8.898430       | 24.397519           |
 
+### Išvados
 
+- Pereinant nuo **Struct** prie **Class** tipo duomenų, 10 M įrašų apdorojimo laikas sumažėjo beveik per pusę visų optimizacijos lygių atvejais.
+- Aukštesni optimizacijos lygiai (O2, O3) suteikė papildomą nedidelį pagreitėjimą, daugiausia nuskaitymo ir rūšiavimo etapuose.
+- Class tipo naudojimas su tinkamai optimizuotais konstruktoriais ir move semantika ženkliai pagerina bendrą našumą.
