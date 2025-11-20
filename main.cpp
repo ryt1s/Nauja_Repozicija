@@ -37,11 +37,14 @@ double rikiuoti(Container& studentai, int sortParam, int order) {
 
 template<typename Container>
 double splitStudentus(Container& studentai,
-                      vector<Student>& vargsiukai,
-                      vector<Student>& kietiakai,
+                      std::vector<Student>& vargsiukai,
+                      std::vector<Student>& kietiakai,
                       SplitStrategy strategy,
-                      int sortParam)
+                      int sortParam) 
 {
+    using namespace std;
+    using namespace std::chrono;
+
     auto start = high_resolution_clock::now();
 
     auto isVargsiukas = [&](const Student& s) {
@@ -52,36 +55,27 @@ double splitStudentus(Container& studentai,
     kietiakai.clear();
 
     if (strategy == SplitStrategy::Copy) {
-
         for (const auto& s : studentai) {
             if (isVargsiukas(s))
                 vargsiukai.push_back(s);
             else
                 kietiakai.push_back(s);
         }
-
-        return duration<double>(high_resolution_clock::now() - start).count();
     }
 
-    if (strategy == SplitStrategy::Move) {
-
-        for (const auto& s : studentai)
-            if (isVargsiukas(s))
-                vargsiukai.push_back(s);
-
-        if constexpr (is_same_v<Container, list<Student>>) {
-            studentai.remove_if(isVargsiukas);
-        } else {
-            studentai.erase(
-                remove_if(studentai.begin(), studentai.end(), isVargsiukas),
-                studentai.end()
-            );
+    else if (strategy == SplitStrategy::Move) {
+        for (auto it = studentai.begin(); it != studentai.end(); ) {
+            if (isVargsiukas(*it)) {
+                vargsiukai.push_back(std::move(*it));
+                it = studentai.erase(it);
+            } else {
+                ++it;
+            }
         }
-
-        return duration<double>(high_resolution_clock::now() - start).count();
+        kietiakai.assign(studentai.begin(), studentai.end());
     }
 
-    {
+    else {
         if constexpr (is_same_v<Container, list<Student>>) {
             list<Student> good_students;
             auto it = stable_partition(studentai.begin(), studentai.end(), isVargsiukas);

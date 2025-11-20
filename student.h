@@ -1,9 +1,12 @@
 #pragma once
 #ifndef STUDENT_H
 #define STUDENT_H
+
 #include <string>
 #include <vector>
 #include <iostream>
+
+double skaiciuotiMediana(const std::vector<int>& paz);
 
 class Student {
 private:
@@ -16,41 +19,25 @@ private:
 
 public:
     Student() = default;
-
     Student(const std::string& pav, const std::string& var,
-            const std::vector<int>& paz, int egz)
-        : pav_(pav), var_(var), paz_(paz), egz_(egz) {
-        skaiciuotiGalutinius();
-    }
-
-    Student(std::istream& is) {
-        readStudent(is);
-    }
+            const std::vector<int>& paz, int egz);
 
     Student(const Student& other);
     Student& operator=(const Student& other);
     ~Student();
 
-    inline const std::string& pav() const { return pav_; }
-    inline const std::string& var() const { return var_; }
-    inline const std::vector<int>& paz() const { return paz_; }
-    inline int egz() const { return egz_; }
-    inline double galVid() const { return galVid_; }
-    inline double galMed() const { return galMed_; }
-
-    inline void setPav(const std::string& p) { pav_ = p; }
-    inline void setVar(const std::string& v) { var_ = v; }
-    inline void setPaz(const std::vector<int>& p) { paz_ = p; }
-    inline void setEgz(int e) { egz_ = e; }
+    const std::string& pav() const { return pav_; }
+    const std::string& var() const { return var_; }
+    const std::vector<int>& paz() const { return paz_; }
+    int egz() const { return egz_; }
+    double galVid() const { return galVid_; }
+    double galMed() const { return galMed_; }
 
     void skaiciuotiGalutinius();
-
     std::istream& readStudent(std::istream& is);
 
-    friend std::ostream& operator<<(std::ostream& os, const Student& s);
     friend std::istream& operator>>(std::istream& is, Student& s);
+    friend std::ostream& operator<<(std::ostream& os, const Student& s);
 };
-
-double skaiciuotiMediana(const std::vector<int>& paz);
 
 #endif
