@@ -1,51 +1,31 @@
-## Programos našumo palyginimas: Struct vs Class
+# Studentų Programa (Versija 1.2)
 
-Atliekant ankstesnės (Struct) ir dabartinės (Class) realizacijos palyginimą, buvo matuojamas veikimo laikas naudojant vieną fiksuotą konteinerį (`vector`) ir pačią greičiausią dalijimo strategiją. Testai atlikti su 1 000 000 ir 10 000 000 įrašų failais.
+## Aprašas
 
-| Konteineris | Duomenų tipas | Failas | Nuskaitymas (s) | Rūšiavimas (s) | Skaidymas (s) | Išvedimas (s) | TESTAVIMO LAIKAS (s) |
-|------------|---------------|--------|----------------|----------------|---------------|----------------|--------------------|
-| vector     | Struct        | 1M     | 2.48           | 3.85           | 0.18          | 0.99           | 7.50               |
-| vector     | Struct        | 10M    | 26.06          | 45.46          | 1.71          | 10.18          | 83.41              |
-| vector     | Class         | 1M     | 1.19           | 1.92           | 0.09          | 0.39           | 3.58               |
-| vector     | Class         | 10M    | 13.73          | 24.39          | 0.84          | 4.62           | 43.58              |
+Ši programa skirta valdyti studentų duomenis: įvesti, rikiuoti pagal galutinį balą (vidurkį arba medianą), skirstyti į grupes („vargsiukai“ ir „kietiakai“) bei išsaugoti į failus. Programoje galima pasirinkti konteinerio tipą (`std::vector` arba `std::list`) ir skirstymo strategiją.  
 
-> Pastaba: pateikti rezultatai – vidurkiai iš 5 testavimų.  
+### Veiksmai programoje
 
-**Išvados:**  
-- Naudojant klasę Student, programa veikia beveik dvigubai greičiau nei su struct.  
-- Skaitant didesnius failus (10M įrašų), skirtumas dar ryškesnis.  
-- Optimaliausia konteinerio pasirinkimas: `vector`, o efektyviausia dalijimo strategija pritaikoma pagal klasės metodus.
+1. **Konteinerio pasirinkimas** – vartotojas gali pasirinkti `vector` arba `list`.  
+2. **Veiksmo pasirinkimas** – įvesti/atsitiktinai sugeneruoti studentus arba sugeneruoti testinius failus.  
+3. **Duomenų įvedimas** – galima pasirinkti vieną iš trijų būdų:  
+   - Rankiniu būdu  
+   - Atsitiktiniai duomenys  
+   - Nuskaitymas iš failo  
 
-- ## Programos našumo analizė pagal kompiliatoriaus optimizacijos lygius
+4. **Galutinio balo skaičiavimo metodas** – galima pasirinkti vidurkį, medianą arba abu.  
+5. **Rikiavimo tvarka** – didėjimo arba mažėjimo tvarka pagal pasirinktą balo metodą.  
+6. **Studentų skirstymo strategija** – kopijavimas į du naujus konteinerius, perkėlimas į vieną naują konteinerį arba efektyviausias metodas.  
+7. **Rezultatų išsaugojimas** – studentų grupės išsaugomos į failus `vargsiukai.txt` ir `kietiakai.txt`.  
 
-| Optimizacijos lygis | Failas | Nuskaitymas (s) | Rūšiavimas (s) | Skaidymas (s) | Išvedimas (s) | TESTAVIMO LAIKAS (s) |
-|-------------------|--------|----------------|----------------|---------------|----------------|--------------------|
-| O1                | 1M     | 1.25           | 2.00           | 0.09          | 0.41           | 3.75               |
-| O2                | 1M     | 1.20           | 1.95           | 0.09          | 0.40           | 3.64               |
-| O3                | 1M     | 1.18           | 1.92           | 0.09          | 0.39           | 3.58               |
+---
 
+## Perdengti metodai
 
+Programa naudoja perdengtus įvesties ir išvesties operatorius `Student` klasėje:
 
-## Eksperimentinė analizė – 10 000 000 įrašų su optimizacijos flag’ais
+### Įvesties operatorius (`operator>>`)
 
-### 1. Naudojant Class duomenų tipą
-
-| Konteineris | Duomenų Tipas | Optim. lygis | Nuskaitymas (s) | Rūšiavimas (s) | Skaidymas (s) | Išvedimas (s) | TESTAVIMO LAIKAS (s) |
-|-------------|---------------|--------------|-----------------|----------------|---------------|----------------|---------------------|
-| vector      | Class         | O1           | 6.864679        | 1.248890       | 0.224021      | 3.888980       | 12.226488           |
-| vector      | Class         | O2           | 6.312110        | 1.127600       | 0.176412      | 3.821162       | 11.437284           |
-| vector      | Class         | O3           | 6.308422        | 1.089155       | 0.170494      | 4.101546       | 11.669617           |
-
-### 2. Naudojant Struct duomenų tipą
-
-| Konteineris | Duomenų Tipas | Optim. lygis | Nuskaitymas (s) | Rūšiavimas (s) | Skaidymas (s) | Išvedimas (s) | TESTAVIMO LAIKAS (s) |
-|-------------|---------------|--------------|-----------------|----------------|---------------|----------------|---------------------|
-| vector      | Struct        | O1           | 14.537979       | 2.677903       | 0.380136      | 9.327177       | 26.923195           |
-| vector      | Struct        | O2           | 12.283420       | 2.391692       | 0.433014      | 9.585143       | 24.693269           |
-| vector      | Struct        | O3           | 12.953310       | 2.196825       | 0.348954      | 8.898430       | 24.397519           |
-
-### Išvados
-
-- Pereinant nuo **Struct** prie **Class** tipo duomenų, 10 M įrašų apdorojimo laikas sumažėjo beveik per pusę visų optimizacijos lygių atvejais.
-- Aukštesni optimizacijos lygiai (O2, O3) suteikė papildomą nedidelį pagreitėjimą, daugiausia nuskaitymo ir rūšiavimo etapuose.
-- Class tipo naudojimas su tinkamai optimizuotais konstruktoriais ir move semantika ženkliai pagerina bendrą našumą.
+- Leidžia įvesti `Student` objektus naudojant standartinę įvestį (`cin`) arba failus (`ifstream`).  
+- Vartotojas gali įvesti studento pavardę, vardą, namų darbų įvertinimus ir egzamino balą.  
+- Šis operatorius naudoja klasės metodą `readStudent`, kuris atlieka faktinį įvedimą ir galutinių balų skaičiavimą.  
