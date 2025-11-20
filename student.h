@@ -15,7 +15,6 @@ private:
     double galMed_ = 0.0;
 
 public:
-    // --- Konstruktoriai / operatoriai ---
     Student() = default;
 
     Student(const std::string& pav, const std::string& var,
@@ -28,16 +27,13 @@ public:
         readStudent(is);
     }
 
-    // Rule of Three
-    Student(const Student& other);               // copy ctor
-    Student& operator=(const Student& other);    // copy assignment
-    ~Student();                                  // destructor
+    Student(const Student& other);
+    Student& operator=(const Student& other);
+    ~Student();
 
-    // Optionally allow defaulted move semantics (Rule of Five friendly)
     Student(Student&&) noexcept = default;
     Student& operator=(Student&&) noexcept = default;
 
-    // --- Getters / setters ---
     inline const std::string& pav() const { return pav_; }
     inline const std::string& var() const { return var_; }
     inline const std::vector<int>& paz() const { return paz_; }
@@ -52,10 +48,8 @@ public:
 
     void skaiciuotiGalutinius();
 
-    // Read from stream into this object (keičia objektą)
     std::istream& readStudent(std::istream& is);
 
-    // I/O operators (friend so can access private fields)
     friend std::ostream& operator<<(std::ostream& os, const Student& s);
     friend std::istream& operator>>(std::istream& is, Student& s);
 };

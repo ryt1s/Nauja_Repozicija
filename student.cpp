@@ -4,6 +4,7 @@
 #include <sstream>
 #include <limits>
 #include <iostream>
+#include <iomanip>
 
 double skaiciuotiMediana(const std::vector<int>& paz) {
     if (paz.empty()) return 0.0;
@@ -13,6 +14,26 @@ double skaiciuotiMediana(const std::vector<int>& paz) {
     if (n % 2 == 1) return static_cast<double>(tmp[n/2]);
     return (static_cast<double>(tmp[n/2 - 1]) + static_cast<double>(tmp[n/2])) / 2.0;
 }
+
+
+Student::Student(const Student& other)
+    : pav_(other.pav_), var_(other.var_), paz_(other.paz_), egz_(other.egz_),
+      galVid_(other.galVid_), galMed_(other.galMed_)
+{
+}
+
+Student& Student::operator=(const Student& other) {
+    if (this == &other) return *this;
+    pav_ = other.pav_;
+    var_ = other.var_;
+    paz_ = other.paz_;
+    egz_ = other.egz_;
+    galVid_ = other.galVid_;
+    galMed_ = other.galMed_;
+    return *this;
+}
+
+Student::~Student() = default;
 
 void Student::skaiciuotiGalutinius() {
     if (paz_.empty()) {
@@ -35,11 +56,12 @@ std::istream& Student::readStudent(std::istream& is) {
 
     int val;
     std::vector<int> tmp;
-    while (is >> val) {
+    std::string restOfLine;
+    std::getline(is, restOfLine);
+    std::istringstream iss(restOfLine);
+    while (iss >> val) {
         tmp.push_back(val);
     }
-    
-    is.clear(); 
 
     if (!tmp.empty()) {
         egz_ = tmp.back();
@@ -52,4 +74,17 @@ std::istream& Student::readStudent(std::istream& is) {
 
     skaiciuotiGalutinius();
     return is;
+}
+
+std::istream& operator>>(std::istream& is, Student& s) {
+    return s.readStudent(is);
+}
+
+std::ostream& operator<<(std::ostream& os, const Student& s) {
+    os << std::setw(25) << std::left << s.pav_
+       << std::setw(25) << std::left << s.var_;
+    os << std::setw(15) << std::right << std::fixed << std::setprecision(2) << s.galVid_
+       << std::setw(15) << std::right << std::fixed << std::setprecision(2) << s.galMed_;
+    os << std::setprecision(6) << std::defaultfloat;
+    return os;
 }
