@@ -7,115 +7,106 @@
 #include <ctime>
 #include <limits>
 #include <random>
+#include <type_traits>
 
 using namespace std;
 
-void generuotiFaila(const std::string& filename, int kiekStudentu, int kiekNd) {
-    std::ofstream fout(filename);
-    if (!fout) {
-        std::cerr << "Nepavyko sukurti failo: " << filename << "\n";
-        return;
-    }
+void generuotiFaila(const string& filename, int kiekStudentu, int kiekNd) {
+    ofstream fout(filename);
+    if (!fout) { cerr << "Nepavyko sukurti failo: " << filename << "\n"; return; }
 
-    fout << std::setw(20) << std::left << "Pavarde"
-         << std::setw(20) << std::left << "Vardas";
+    fout << setw(20) << left << "Pavarde"
+         << setw(20) << left << "Vardas";
+    for (int i = 1; i <= kiekNd; ++i) fout << setw(5) << ("ND" + to_string(i));
+    fout << setw(10) << "Egzaminas" << "\n";
 
-    for (int i = 1; i <= kiekNd; ++i)
-        fout << std::setw(5) << ("ND" + std::to_string(i));
-
-    fout << std::setw(10) << "Egzaminas" << "\n";
-
-    std::mt19937 rng(static_cast<unsigned>(std::time(nullptr)));
-    std::uniform_int_distribution<int> dist(1, 10);
+    mt19937 rng(static_cast<unsigned>(time(nullptr)));
+    uniform_int_distribution<int> dist(1, 10);
 
     for (int i = 1; i <= kiekStudentu; ++i) {
-        std::string pav = "Pavarde" + std::to_string(i);
-        std::string var = "Vardas" + std::to_string(i);
+        string pav = "Pavarde" + to_string(i);
+        string var = "Vardas" + to_string(i);
 
-        fout << std::setw(20) << std::left << pav
-             << std::setw(20) << std::left << var;
+        fout << setw(20) << left << pav
+             << setw(20) << left << var;
 
-        for (int j = 0; j < kiekNd; ++j)
-            fout << std::setw(5) << dist(rng);
-        fout << std::setw(10) << dist(rng) << "\n";
+        for (int j = 0; j < kiekNd; ++j) fout << setw(5) << dist(rng);
+        fout << setw(10) << dist(rng) << "\n";
     }
 
-    fout.close();
-    std::cout << "Sugeneruotas failas: " << filename
-              << " (" << kiekStudentu << " irasu)\n";
+    cout << "Sugeneruotas failas: " << filename
+         << " (" << kiekStudentu << " irasu)\n";
 }
 
 template<typename Container>
-void nuskaitytiIsFailoTemplate(const std::string& filename, Container& studentai) {
-    std::ifstream fin(filename);
-    if (!fin) { std::cerr << "Nepavyko atidaryti failo: " << filename << "\n"; return; }
-    
-    std::string header;
-    std::getline(fin, header);
+void nuskaitytiIsFailoTemplate(const string& filename, Container& studentai) {
+    ifstream fin(filename);
+    if (!fin) { cerr << "Nepavyko atidaryti failo: " << filename << "\n"; return; }
 
-    while (fin.peek() != EOF) {
-        Student stud;
-        stud.readStudent(fin);
-        fin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        if (!stud.pav().empty())
-            studentai.push_back(std::move(stud));
+    string header;
+    getline(fin, header);
+
+    Student stud;
+    while (fin >> stud) {
+        studentai.push_back(move(stud));
     }
 }
 
-void nuskaitytiIsFailo(const std::string& filename, std::vector<Student>& studentai) {
+void nuskaitytiIsFailo(const string& filename, vector<Student>& studentai) {
     nuskaitytiIsFailoTemplate(filename, studentai);
 }
 
-void nuskaitytiIsFailo(const std::string& filename, std::list<Student>& studentai) {
+void nuskaitytiIsFailo(const string& filename, list<Student>& studentai) {
     nuskaitytiIsFailoTemplate(filename, studentai);
 }
 
-template <typename Container>
-void issaugotiIFailaTemplate(const std::string& filename, const Container& students, int metod) {
-    std::ofstream fout(filename, std::ios::out | std::ios::trunc);
+template<typename Container>
+void issaugotiIFailaTemplate(const string& filename, const Container& students, int metod) {
+    ofstream fout(filename, ios::out | ios::trunc);
     if (!fout.is_open()) return;
 
-    fout << std::setw(25) << std::left << "Pavarde"
-         << std::setw(25) << std::left << "Vardas";
+    fout << setw(25) << left << "Pavarde"
+         << setw(25) << left << "Vardas";
+
     if (metod == 3) {
-        fout << std::setw(15) << std::left << "Galutinis (Vid.)"
-             << std::setw(15) << std::left << "Galutinis (Med.)";
+        fout << setw(15) << left << "Galutinis (Vid.)"
+             << setw(15) << left << "Galutinis (Med.)";
     } else {
-        fout << std::setw(15) << std::left << "Galutinis";
+        fout << setw(15) << left << "Galutinis";
     }
     fout << "\n";
 
-    std::string buffer;
+    string buffer;
     buffer.reserve(1 << 20);
     const size_t FLUSH_THRESHOLD = (1 << 20);
 
     for (const auto& s : students) {
-        char line[512];
-        int n = 0;
+        string line;
+
         if (metod == 3) {
-            n = std::snprintf(line, sizeof(line),
-                              "%-25s %-25s %15.2f %15.2f\n",
-                              s.pav().c_str(), s.var().c_str(), s.galVid(), s.galMed());
+            line = s.var() + " " + s.pav() + " " +
+                   to_string(s.galVid()) + " " + to_string(s.galMed()) + "\n";
         } else {
-            double galutinis = (metod == 1 ? s.galVid() : s.galMed());
-            n = std::snprintf(line, sizeof(line),
-                              "%-25s %-25s %15.2f\n",
-                              s.pav().c_str(), s.var().c_str(), galutinis);
+            double gal = (metod == 1 ? s.galVid() : s.galMed());
+            line = s.var() + " " + s.pav() + " " + to_string(gal) + "\n";
         }
-        buffer.append(line, static_cast<size_t>(n));
+
+        buffer += line;
+
         if (buffer.size() > FLUSH_THRESHOLD) {
             fout.write(buffer.data(), buffer.size());
             buffer.clear();
         }
     }
+
     if (!buffer.empty()) fout.write(buffer.data(), buffer.size());
 }
 
-void issaugotiIFaila(const std::string& filename, const std::vector<Student>& students, int metod) {
+void issaugotiIFaila(const string& filename, const vector<Student>& students, int metod) {
     issaugotiIFailaTemplate(filename, students, metod);
 }
 
-void issaugotiIFaila(const std::string& filename, const std::list<Student>& students, int metod) {
+void issaugotiIFaila(const string& filename, const list<Student>& students, int metod) {
     issaugotiIFailaTemplate(filename, students, metod);
 }
 
@@ -124,16 +115,19 @@ int inputSkaicius(const string& pranesimas, int min, int max) {
     while (true) {
         cout << pranesimas;
         cin >> value;
+
         if (cin.fail()) {
             cin.clear();
             cin.ignore(1000, '\n');
             cout << "Klaida! Iveskite sveika skaiciu.\n";
             continue;
         }
+
         if (value < min || value > max) {
             cout << "Balas turi buti nuo " << min << " iki " << max << ". Bandykite dar karta.\n";
             continue;
         }
+
         break;
     }
     return value;

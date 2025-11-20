@@ -149,12 +149,12 @@ int main() {
     auto ivestiStudentus = [](auto& studentai, int ivestis) {
         char testi;
         do {
-            string vardas, pavarde;
-            vector<int> pazymiai;
+            std::string vardas, pavarde;
+            std::vector<int> pazymiai;
             int egzaminas = 0;
 
-            cout << "Vardas: "; cin >> vardas;
-            cout << "Pavarde: "; cin >> pavarde;
+            std::cout << "Vardas: "; std::cin >> vardas;
+            std::cout << "Pavarde: "; std::cin >> pavarde;
 
             if (ivestis == 1) { 
                 int laik;
@@ -163,23 +163,24 @@ int main() {
                 egzaminas = inputSkaicius("Egzaminas: ", 1, 10);
             } else {
                 int kiek = rand() % 10 + 1;
-                cout << "ND ivertinimai: ";
+                std::cout << "ND ivertinimai: ";
                 for (int i = 0; i < kiek; i++) {
                     int nd = rand() % 10 + 1;
                     pazymiai.push_back(nd);
-                    cout << nd << " ";
+                    std::cout << nd << " ";
                 }
                 egzaminas = rand() % 10 + 1;
-                cout << "\nEgzamino ivertinimas: " << egzaminas << endl;
+                std::cout << "\nEgzamino ivertinimas: " << egzaminas << std::endl;
             }
 
-            Student naujas_stud(pavarde, vardas, pazymiai, egzaminas);
-            cout << "Objekto atminties adresas: " << &naujas_stud << endl;
-            studentai.push_back(std::move(naujas_stud));
+            studentai.emplace_back(pavarde, vardas, pazymiai, egzaminas);
 
-            cout << "Dar vienas? (t/n) "; cin >> testi;
+            std::cout << "Objekto adresas konteineryje: " << &studentai.back() << std::endl;
+
+            std::cout << "Dar vienas? (t/n) "; std::cin >> testi;
         } while (testi == 't' || testi == 'T');
     };
+
 
     if (ivestis == 3) {
         cout << "Iveskite failo pavadinima: "; cin >> failas;
