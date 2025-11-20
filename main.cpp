@@ -40,7 +40,7 @@ double splitStudentus(Container& studentai,
                       vector<Student>& vargsiukai,
                       vector<Student>& kietiakai,
                       SplitStrategy strategy,
-                      int sortParam) 
+                      int sortParam)
 {
     auto start = high_resolution_clock::now();
 
@@ -51,44 +51,44 @@ double splitStudentus(Container& studentai,
     vargsiukai.clear();
     kietiakai.clear();
 
-    if constexpr (is_same_v<Container, list<Student>>) {
-        if (strategy == SplitStrategy::Copy) {
-            list<Student> good_students;
-            auto it = stable_partition(studentai.begin(), studentai.end(), isVargsiukas);
-            good_students.splice(good_students.begin(), studentai, it, studentai.end());
+    if (strategy == SplitStrategy::Copy) {
 
-            vargsiukai.assign(studentai.begin(), studentai.end());
-            kietiakai.assign(good_students.begin(), good_students.end());
-
-        } else if (strategy == SplitStrategy::Move) {
-            copy_if(studentai.begin(), studentai.end(), back_inserter(vargsiukai), isVargsiukas);
-            studentai.remove_if(isVargsiukas);
-            kietiakai.assign(make_move_iterator(studentai.begin()),
-                             make_move_iterator(studentai.end()));
-
-        } else {
-            list<Student> good_students;
-            auto it = stable_partition(studentai.begin(), studentai.end(), isVargsiukas);
-            good_students.splice(good_students.begin(), studentai, it, studentai.end());
-
-            vargsiukai.assign(make_move_iterator(studentai.begin()), 
-                              make_move_iterator(studentai.end()));
-            kietiakai.assign(make_move_iterator(good_students.begin()),
-                             make_move_iterator(good_students.end()));
+        for (const auto& s : studentai) {
+            if (isVargsiukas(s))
+                vargsiukai.push_back(s);
+            else
+                kietiakai.push_back(s);
         }
 
-    } else {
-        if (strategy == SplitStrategy::Copy) {
+        return duration<double>(high_resolution_clock::now() - start).count();
+    }
+
+    if (strategy == SplitStrategy::Move) {
+
+        for (const auto& s : studentai)
+            if (isVargsiukas(s))
+                vargsiukai.push_back(s);
+
+        if constexpr (is_same_v<Container, list<Student>>) {
+            studentai.remove_if(isVargsiukas);
+        } else {
+            studentai.erase(
+                remove_if(studentai.begin(), studentai.end(), isVargsiukas),
+                studentai.end()
+            );
+        }
+
+        return duration<double>(high_resolution_clock::now() - start).count();
+    }
+
+    {
+        if constexpr (is_same_v<Container, list<Student>>) {
+            list<Student> good_students;
             auto it = stable_partition(studentai.begin(), studentai.end(), isVargsiukas);
-            vargsiukai.assign(studentai.begin(), it);
-            kietiakai.assign(it, studentai.end());
+            good_students.splice(good_students.begin(), studentai, it, studentai.end());
 
-        } else if (strategy == SplitStrategy::Move) {
-            copy_if(studentai.begin(), studentai.end(), back_inserter(vargsiukai), isVargsiukas);
-            studentai.erase(remove_if(studentai.begin(), studentai.end(), isVargsiukas), studentai.end());
-            kietiakai.assign(make_move_iterator(studentai.begin()), 
-                             make_move_iterator(studentai.end()));
-
+            vargsiukai.assign(make_move_iterator(studentai.begin()), make_move_iterator(studentai.end()));
+            kietiakai.assign(make_move_iterator(good_students.begin()), make_move_iterator(good_students.end()));
         } else {
             auto it = partition(studentai.begin(), studentai.end(), isVargsiukas);
             vargsiukai.assign(make_move_iterator(studentai.begin()), make_move_iterator(it));
@@ -243,7 +243,7 @@ int main() {
     cout << "\n========== TESTING FILE: " << failas << " ==========\n";
     cout << "Duomenu nuskaitymas: "; printTime(t_read); cout << "\n";
     cout << "Rikiavimas pagal " << metricStr << " (" << orderStr << "): "; printTime(t_sort); cout << "\n";
-    cout << "Skirstymas i grupes: "; printTime(t_split); cout << "\n";
+    cout << "Skirstymas i grupes: "; printTime(t_split); cout << "\n";  
     cout << "Isvedimas i failus: "; printTime(t_write); cout << "\n";
 
     cout << "Testavimo laikas: "; printTime(t_read + t_sort + t_split + t_write); cout << "\n\n";
