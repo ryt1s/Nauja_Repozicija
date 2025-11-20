@@ -31,9 +31,6 @@ public:
     Student& operator=(const Student& other);
     ~Student();
 
-    Student(Student&&) noexcept = default;
-    Student& operator=(Student&&) noexcept = default;
-
     inline const std::string& pav() const { return pav_; }
     inline const std::string& var() const { return var_; }
     inline const std::vector<int>& paz() const { return paz_; }

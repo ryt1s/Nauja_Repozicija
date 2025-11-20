@@ -18,9 +18,7 @@ double skaiciuotiMediana(const std::vector<int>& paz) {
 
 Student::Student(const Student& other)
     : pav_(other.pav_), var_(other.var_), paz_(other.paz_), egz_(other.egz_),
-      galVid_(other.galVid_), galMed_(other.galMed_)
-{
-}
+      galVid_(other.galVid_), galMed_(other.galMed_) {}
 
 Student& Student::operator=(const Student& other) {
     if (this == &other) return *this;
@@ -33,7 +31,14 @@ Student& Student::operator=(const Student& other) {
     return *this;
 }
 
-Student::~Student() = default;
+Student::~Student() {
+    pav_.clear();
+    var_.clear();
+    paz_.clear();
+    egz_ = 0;
+    galVid_ = 0.0;
+    galMed_ = 0.0;
+}
 
 void Student::skaiciuotiGalutinius() {
     if (paz_.empty()) {
