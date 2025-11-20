@@ -60,46 +60,50 @@ void nuskaitytiIsFailo(const string& filename, list<Student>& studentai) {
     nuskaitytiIsFailoTemplate(filename, studentai);
 }
 
-template<typename Container>
-void issaugotiIFailaTemplate(const string& filename, const Container& students, int metod) {
-    ofstream fout(filename, ios::out | ios::trunc);
+template <typename Container>
+void issaugotiIFailaTemplate(const std::string& filename, const Container& students, int metod) {
+    std::ofstream fout(filename, std::ios::out | std::ios::trunc);
     if (!fout.is_open()) return;
 
-    fout << setw(25) << left << "Pavarde"
-         << setw(25) << left << "Vardas";
+    fout << std::left << std::setw(25) << "Pavarde"
+         << std::setw(25) << "Vardas";
 
     if (metod == 3) {
-        fout << setw(15) << left << "Galutinis (Vid.)"
-             << setw(15) << left << "Galutinis (Med.)";
+        fout << std::setw(15) << "Galutinis (Vid.)"
+             << std::setw(15) << "Galutinis (Med.)";
     } else {
-        fout << setw(15) << left << "Galutinis";
+        fout << std::setw(15) << "Galutinis";
     }
     fout << "\n";
 
-    string buffer;
+    std::string buffer;
     buffer.reserve(1 << 20);
     const size_t FLUSH_THRESHOLD = (1 << 20);
 
     for (const auto& s : students) {
-        string line;
+        std::ostringstream line;
+        line << std::left << std::setw(25) << s.pav()
+             << std::setw(25) << s.var();
 
         if (metod == 3) {
-            line = s.var() + " " + s.pav() + " " +
-                   to_string(s.galVid()) + " " + to_string(s.galMed()) + "\n";
+            line << std::setw(15) << std::fixed << std::setprecision(2) << s.galVid()
+                 << std::setw(15) << std::fixed << std::setprecision(2) << s.galMed();
         } else {
-            double gal = (metod == 1 ? s.galVid() : s.galMed());
-            line = s.var() + " " + s.pav() + " " + to_string(gal) + "\n";
+            double galutinis = (metod == 1 ? s.galVid() : s.galMed());
+            line << std::setw(15) << std::fixed << std::setprecision(2) << galutinis;
         }
+        line << "\n";
 
-        buffer += line;
-
+        buffer.append(line.str());
         if (buffer.size() > FLUSH_THRESHOLD) {
             fout.write(buffer.data(), buffer.size());
             buffer.clear();
         }
     }
 
-    if (!buffer.empty()) fout.write(buffer.data(), buffer.size());
+    if (!buffer.empty()) {
+        fout.write(buffer.data(), buffer.size());
+    }
 }
 
 void issaugotiIFaila(const string& filename, const vector<Student>& students, int metod) {

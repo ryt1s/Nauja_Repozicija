@@ -9,15 +9,38 @@
 #include <string>
 #include <iomanip>
 #include <limits>
+#include <iterator>
+#include <sstream>
+#include <fstream>
 
 using namespace std;
 using namespace chrono;
 
 enum class SplitStrategy { Copy = 1, Move = 2, Splice = 3 };
 
+int getIntChoice(const std::string& prompt, int min, int max) {
+    int value;
+    while (true) {
+        cout << prompt;
+        if (!(cin >> value)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Klaida! Iveskite sveika skaiciu.\n";
+            continue;
+        }
+        if (value < min || value > max) {
+            cout << "Pasirinkimas turi buti nuo " << min << " iki " << max << ".\n";
+            continue;
+        }
+        break;
+    }
+    return value;
+}
+
 template<typename Container>
 double rikiuoti(Container& studentai, int sortParam, int order) {
     auto start = high_resolution_clock::now();
+
     auto comp = [&](const Student& a, const Student& b) {
         double left  = (sortParam == 2 ? a.galMed() : a.galVid());
         double right = (sortParam == 2 ? b.galMed() : b.galVid());
@@ -34,12 +57,13 @@ double rikiuoti(Container& studentai, int sortParam, int order) {
 
 template<typename Container>
 double splitStudentus(Container& studentai,
-                      vector<Student>& vargsiukai,
-                      vector<Student>& kietiakai,
+                      std::vector<Student>& vargsiukai,
+                      std::vector<Student>& kietiakai,
                       SplitStrategy strategy,
                       int sortParam) 
 {
     auto start = high_resolution_clock::now();
+
     auto isVargsiukas = [&](const Student& s) {
         return (sortParam == 2 ? s.galMed() : s.galVid()) < 5.0;
     };
@@ -48,10 +72,11 @@ double splitStudentus(Container& studentai,
     kietiakai.clear();
 
     if (strategy == SplitStrategy::Copy) {
-        for (const auto& s : studentai)
-            (isVargsiukas(s) ? vargsiukai : kietiakai).push_back(s);
-    } 
-    else if (strategy == SplitStrategy::Move) {
+        for (const auto& s : studentai) {
+            if (isVargsiukas(s)) vargsiukai.push_back(s);
+            else kietiakai.push_back(s);
+        }
+    } else if (strategy == SplitStrategy::Move) {
         for (auto it = studentai.begin(); it != studentai.end(); ) {
             if (isVargsiukas(*it)) {
                 vargsiukai.push_back(std::move(*it));
@@ -59,8 +84,7 @@ double splitStudentus(Container& studentai,
             } else ++it;
         }
         kietiakai.assign(studentai.begin(), studentai.end());
-    } 
-    else {
+    } else {
         if constexpr (is_same_v<Container, list<Student>>) {
             list<Student> good_students;
             auto it = stable_partition(studentai.begin(), studentai.end(), isVargsiukas);
@@ -77,47 +101,6 @@ double splitStudentus(Container& studentai,
     return duration<double>(high_resolution_clock::now() - start).count();
 }
 
-void printTime(double seconds) {
-    cout << fixed << setprecision(6);
-    if (seconds < 0.5) cout << seconds * 1000 << " ms";
-    else cout << seconds << " s";
-    cout << setprecision(2) << defaultfloat;
-}
-
-auto ivestiStudentus = [](auto& studentai, int ivestis) {
-    char testi;
-    do {
-        string vardas, pavarde;
-        vector<int> pazymiai;
-        int egzaminas = 0;
-
-        cout << "Vardas: "; cin >> vardas;
-        cout << "Pavarde: "; cin >> pavarde;
-
-        if (ivestis == 1) {
-            int laik;
-            while ((laik = inputSkaicius("ND (0 baigti): ", 0, 10)) != 0)
-                pazymiai.push_back(laik);
-            egzaminas = inputSkaicius("Egzaminas: ", 1, 10);
-        } else {
-            int kiek = rand() % 10 + 1;
-            cout << "ND ivertinimai: ";
-            for (int i = 0; i < kiek; i++) {
-                int nd = rand() % 10 + 1;
-                pazymiai.push_back(nd);
-                cout << nd << " ";
-            }
-            egzaminas = rand() % 10 + 1;
-            cout << "\nEgzamino ivertinimas: " << egzaminas << endl;
-        }
-
-        studentai.emplace_back(pavarde, vardas, pazymiai, egzaminas);
-        cout << "Objekto adresas konteineryje: " << &studentai.back() << endl;
-
-        cout << "Dar vienas? (t/n) "; cin >> testi;
-    } while (testi == 't' || testi == 'T');
-};
-
 int main() {
     srand(static_cast<unsigned>(time(nullptr)));
 
@@ -126,13 +109,15 @@ int main() {
     vector<Student> vargsiukai, kietiakai;
     bool useList = false;
 
-    cout << "Pasirinkite konteinerio tipa:\n1 - std::vector\n2 - std::list\nJusu pasirinkimas: ";
-    int containerChoice; cin >> containerChoice;
+    int containerChoice = getIntChoice(
+        "Pasirinkite konteinerio tipa:\n1 - std::vector\n2 - std::list\nJusu pasirinkimas: ", 
+        1, 2);
     useList = (containerChoice == 2);
     cout << "Naudojamas konteineris: " << (useList ? "std::list" : "std::vector") << "\n";
 
-    cout << "Pasirinkite veiksma:\n1 - Ivesti / generuoti / nuskaityti studentus\n2 - Sugeneruoti testinius failus\nJusu pasirinkimas: ";
-    int pasirinkimas; cin >> pasirinkimas;
+    int pasirinkimas = getIntChoice(
+        "Pasirinkite veiksma:\n1 - Ivesti / generuoti / nuskaityti studentus\n2 - Sugeneruoti testinius failus\nJusu pasirinkimas: ",
+        1, 2);
 
     if (pasirinkimas == 2) {
         vector<int> dydziai = {1000, 10000, 100000, 1000000, 10000000};
@@ -142,21 +127,70 @@ int main() {
             auto start = high_resolution_clock::now();
             generuotiFaila(filename, dydis, kiekNd);
             auto end = high_resolution_clock::now();
-            cout << "Sugeneruotas failas " << filename << " per " 
+            cout << "Sugeneruotas failas " << filename << " per "
                  << duration<double>(end - start).count() << " s\n";
         }
         return 0;
     }
 
-    cout << "Pasirinkite duomenu ivedimo buda:\n1 - Rankiniu budu\n2 - Atsitiktiniai\n3 - Nuskaityti is failo\nJusu pasirinkimas: ";
-    int ivestis; cin >> ivestis;
+    int ivestis = getIntChoice(
+        "Pasirinkite duomenu ivedimo buda:\n1 - Rankiniu budu\n2 - Atsitiktiniai\n3 - Nuskaityti is failo\nJusu pasirinkimas: ",
+        1, 3);
 
     string failas;
     int sortParam = 1, order = 1, metod = 1;
     double t_read = 0.0, t_sort = 0.0, t_split = 0.0, t_write = 0.0;
 
+    auto printTime = [](double seconds) {
+        cout << fixed << setprecision(6);
+        if (seconds < 0.5) cout << seconds * 1000 << " ms";
+        else cout << seconds << " s";
+        cout << setprecision(2) << defaultfloat;
+    };
+
+    auto ivestiStudentus = [](auto& studentai, int ivestis) {
+        char testi;
+        do {
+            string vardas, pavarde;
+            vector<int> pazymiai;
+            int egzaminas = 0;
+
+            cout << "Vardas: "; cin >> vardas;
+            cout << "Pavarde: "; cin >> pavarde;
+
+            if (ivestis == 1) {
+                int laik;
+                while ((laik = inputSkaicius("ND (0 baigti): ", 0, 10)) != 0)
+                    pazymiai.push_back(laik);
+                egzaminas = inputSkaicius("Egzaminas: ", 1, 10);
+            } else {
+                int kiek = rand() % 10 + 1;
+                cout << "ND ivertinimai: ";
+                for (int i = 0; i < kiek; i++) {
+                    int nd = rand() % 10 + 1;
+                    pazymiai.push_back(nd);
+                    cout << nd << " ";
+                }
+                egzaminas = rand() % 10 + 1;
+                cout << "\nEgzamino ivertinimas: " << egzaminas << endl;
+            }
+
+            studentai.emplace_back(pavarde, vardas, pazymiai, egzaminas);
+            cout << "Objekto adresas konteineryje: " << &studentai.back() << endl;
+
+            cout << "Dar vienas? (t/n) "; cin >> testi;
+        } while (testi == 't' || testi == 'T');
+    };
+
     if (ivestis == 3) {
         cout << "Iveskite failo pavadinima: "; cin >> failas;
+        ifstream fin(failas);
+        if (!fin) {
+            cerr << "Failas neegzistuoja arba negalima atidaryti: " << failas << "\n";
+            return 1;
+        }
+        fin.close();
+
         auto start_read = high_resolution_clock::now();
         if (useList) nuskaitytiIsFailo(failas, studentai_list);
         else nuskaitytiIsFailo(failas, studentai_vec);
@@ -167,31 +201,28 @@ int main() {
         failas = "manual_input";
     }
 
-    cout << "Pasirinkite galutinio balo skaiciavimo metoda:\n1 - Vidurkis\n2 - Mediana\n3 - Abu\nJusu pasirinkimas: ";
-    cin >> metod;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    metod = getIntChoice("Pasirinkite galutinio balo skaiciavimo metoda:\n1 - Vidurkis\n2 - Mediana\n3 - Abu\nJusu pasirinkimas: ", 1, 3);
+    if (metod == 3)
+        sortParam = getIntChoice("Pagal ka rusiuoti?\n1 - Vidurki\n2 - Mediana\nJusu pasirinkimas: ", 1, 2);
+    order = getIntChoice("Rikiuoti:\n1 - Didejanciai\n2 - Mazejanciai\nJusu pasirinkimas: ", 1, 2);
+    int splitStrategy = getIntChoice(
+        "Pasirinkite studentu skirstymo strategija (T_split):\n1 - Skaidymas i du naujus konteinerius (Kopijavimas)\n2 - Skaidymas i viena nauja konteineri (Trynimas/Perkėlimas)\n3 - Efektyviausias metodas (Splice/Move)\nJusu pasirinkimas: ",
+        1, 3);
 
-    if (metod == 3) {
-        cout << "Pagal ka rusiuoti?\n1 - Vidurki\n2 - Mediana\n"; cin >> sortParam;
-    }
-    cout << "Rikiuoti:\n1 - Didejanciai\n2 - Mazejanciai\n"; cin >> order;
+    t_sort = useList ? rikiuoti(studentai_list, sortParam, order)
+                     : rikiuoti(studentai_vec, sortParam, order);
+    cout << "Rikiavimas: "; printTime(t_sort); cout << "\n";
 
-    cout << "Pasirinkite studentu skirstymo strategija (T_split):\n";
-    cout << "1 - Kopijavimas\n2 - Trynimas/Perkelimas\n3 - Efektyviausias\nJusu pasirinkimas: ";
-    int splitStrategy; cin >> splitStrategy;
-
-    if (useList) {
-        t_sort = rikiuoti(studentai_list, sortParam, order);
-        t_split = splitStudentus(studentai_list, vargsiukai, kietiakai, static_cast<SplitStrategy>(splitStrategy), sortParam);
-    } else {
-        t_sort = rikiuoti(studentai_vec, sortParam, order);
-        t_split = splitStudentus(studentai_vec, vargsiukai, kietiakai, static_cast<SplitStrategy>(splitStrategy), sortParam);
-    }
+    t_split = useList ? splitStudentus(studentai_list, vargsiukai, kietiakai, static_cast<SplitStrategy>(splitStrategy), sortParam)
+                      : splitStudentus(studentai_vec, vargsiukai, kietiakai, static_cast<SplitStrategy>(splitStrategy), sortParam);
+    cout << "Skirstymas i grupes: "; printTime(t_split); cout << "\n";
 
     auto start_write = high_resolution_clock::now();
     issaugotiIFaila("vargsiukai.txt", vargsiukai, metod);
     issaugotiIFaila("kietiakai.txt", kietiakai, metod);
-    t_write = duration<double>(high_resolution_clock::now() - start_write).count();
+    auto end_write = high_resolution_clock::now();
+    t_write = duration<double>(end_write - start_write).count();
+    cout << "Isvedimas i failus: "; printTime(t_write); cout << "\n";
 
     string metricStr = (sortParam == 1) ? "Vidurkis" : "Mediana";
     string orderStr = (order == 1) ? "Didejimo tvarka" : "Mazejimo tvarka";
