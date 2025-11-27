@@ -19,20 +19,18 @@ private:
 public:
     Student() = default;
 
-    Student(const std::string& pav, const std::string& var,
+    Student(const std::string& vardas, const std::string& pavarde,
             const std::vector<int>& paz, int egz)
-        : Zmogus(pav, var), paz_(paz), egz_(egz) {}
+        : Zmogus(vardas, pavarde), paz_(paz), egz_(egz) {}
 
     Student(const Student& other)
-        : Zmogus(other),
-          paz_(other.paz_),
-          egz_(other.egz_),
-          galVid_(other.galVid_),
-          galMed_(other.galMed_) {}
+        : Zmogus(other.vardas(), other.pavarde()), paz_(other.paz_),
+          egz_(other.egz_), galVid_(other.galVid_), galMed_(other.galMed_) {}
 
     Student& operator=(const Student& other) {
         if (this != &other) {
-            Zmogus::operator=(other);
+            vardas_ = other.vardas();
+            pavarde_ = other.pavarde();
             paz_ = other.paz_;
             egz_ = other.egz_;
             galVid_ = other.galVid_;
@@ -58,6 +56,10 @@ public:
 
     friend std::istream& operator>>(std::istream& is, Student& s);
     friend std::ostream& operator<<(std::ostream& os, const Student& s);
+
+    void print() const override {
+        std::cout << vardas_ << " " << pavarde_ << "\n";
+    }
 };
 
 #endif

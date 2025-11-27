@@ -12,21 +12,21 @@ double skaiciuotiMediana(const std::vector<int>& paz) {
     return (static_cast<double>(tmp[n / 2 - 1]) + static_cast<double>(tmp[n / 2])) / 2.0;
 }
 
-Student::Student(const std::string& pav, const std::string& var,
+Student::Student(const std::string& vardas, const std::string& pavarde,
                  const std::vector<int>& paz, int egz)
-    : pav_(pav), var_(var), paz_(paz), egz_(egz) {
+    : Zmogus(vardas, pavarde), paz_(paz), egz_(egz) {
     skaiciuotiGalutinius();
 }
 
 Student::Student(const Student& other)
-    : pav_(other.pav_), var_(other.var_),
+    : Zmogus(other.vardas(), other.pavarde()),
       paz_(other.paz_), egz_(other.egz_),
       galVid_(other.galVid_), galMed_(other.galMed_) {}
 
 Student& Student::operator=(const Student& other) {
     if (this != &other) {
-        pav_ = other.pav_;
-        var_ = other.var_;
+        vardas_ = other.vardas();
+        pavarde_ = other.pavarde();
         paz_ = other.paz_;
         egz_ = other.egz_;
         galVid_ = other.galVid_;
@@ -36,8 +36,6 @@ Student& Student::operator=(const Student& other) {
 }
 
 Student::~Student() {
-    pav_.clear();
-    var_.clear();
     paz_.clear();
     egz_ = 0;
     galVid_ = 0.0;
@@ -56,8 +54,8 @@ void Student::skaiciuotiGalutinius() {
 }
 
 std::istream& Student::readStudent(std::istream& is) {
-    pav_.clear(); var_.clear(); paz_.clear(); egz_ = 0;
-    if (!(is >> pav_ >> var_)) return is;
+    paz_.clear(); egz_ = 0;
+    if (!(is >> vardas_ >> pavarde_)) return is;
 
     int val;
     std::vector<int> tmp;
@@ -79,8 +77,8 @@ std::istream& operator>>(std::istream& is, Student& s) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Student& s) {
-    os << std::setw(25) << std::left << s.pav()
-       << std::setw(25) << std::left << s.var()
+    os << std::setw(25) << std::left << s.vardas()
+       << std::setw(25) << std::left << s.pavarde()
        << std::setw(15) << std::right << std::fixed << std::setprecision(2) << s.galVid()
        << std::setw(15) << std::right << std::fixed << std::setprecision(2) << s.galMed();
     return os;
