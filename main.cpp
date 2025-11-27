@@ -175,7 +175,7 @@ int main() {
                 cout << "\nEgzamino ivertinimas: " << egzaminas << endl;
             }
 
-            studentai.emplace_back(pavarde, vardas, pazymiai, egzaminas);
+            studentai.emplace_back(vardas, pavarde, pazymiai, egzaminas);
             cout << "Objekto adresas konteineryje: " << &studentai.back() << endl;
 
             cout << "Dar vienas? (t/n) "; cin >> testi;

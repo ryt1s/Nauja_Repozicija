@@ -82,8 +82,8 @@ void issaugotiIFailaTemplate(const std::string& filename, const Container& stude
 
     for (const auto& s : students) {
         std::ostringstream line;
-        line << std::left << std::setw(25) << s.pav()
-             << std::setw(25) << s.var();
+        line << std::left << std::setw(25) << s.pavarde()
+             << std::setw(25) << s.vardas();
 
         if (metod == 3) {
             line << std::setw(15) << std::fixed << std::setprecision(2) << s.galVid()

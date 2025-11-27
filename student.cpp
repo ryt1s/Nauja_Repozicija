@@ -12,36 +12,6 @@ double skaiciuotiMediana(const std::vector<int>& paz) {
     return (static_cast<double>(tmp[n / 2 - 1]) + static_cast<double>(tmp[n / 2])) / 2.0;
 }
 
-Student::Student(const std::string& vardas, const std::string& pavarde,
-                 const std::vector<int>& paz, int egz)
-    : Zmogus(vardas, pavarde), paz_(paz), egz_(egz) {
-    skaiciuotiGalutinius();
-}
-
-Student::Student(const Student& other)
-    : Zmogus(other.vardas(), other.pavarde()),
-      paz_(other.paz_), egz_(other.egz_),
-      galVid_(other.galVid_), galMed_(other.galMed_) {}
-
-Student& Student::operator=(const Student& other) {
-    if (this != &other) {
-        vardas_ = other.vardas();
-        pavarde_ = other.pavarde();
-        paz_ = other.paz_;
-        egz_ = other.egz_;
-        galVid_ = other.galVid_;
-        galMed_ = other.galMed_;
-    }
-    return *this;
-}
-
-Student::~Student() {
-    paz_.clear();
-    egz_ = 0;
-    galVid_ = 0.0;
-    galMed_ = 0.0;
-}
-
 void Student::skaiciuotiGalutinius() {
     if (paz_.empty()) {
         galVid_ = 0.6 * egz_;
@@ -54,7 +24,7 @@ void Student::skaiciuotiGalutinius() {
 }
 
 std::istream& Student::readStudent(std::istream& is) {
-    paz_.clear(); egz_ = 0;
+    vardas_.clear(); pavarde_.clear(); paz_.clear(); egz_ = 0;
     if (!(is >> vardas_ >> pavarde_)) return is;
 
     int val;
@@ -77,8 +47,8 @@ std::istream& operator>>(std::istream& is, Student& s) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Student& s) {
-    os << std::setw(25) << std::left << s.vardas()
-       << std::setw(25) << std::left << s.pavarde()
+    os << std::setw(25) << std::left << s.pavarde_
+       << std::setw(25) << std::left << s.vardas_
        << std::setw(15) << std::right << std::fixed << std::setprecision(2) << s.galVid()
        << std::setw(15) << std::right << std::fixed << std::setprecision(2) << s.galMed();
     return os;
