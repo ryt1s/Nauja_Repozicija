@@ -1,0 +1,49 @@
+# Doxyfile 1.9.8 - tuned for Student project v2.0
+
+PROJECT_NAME           = "Student Management Project"
+PROJECT_BRIEF          = "v2.0 Doxygen documentation"
+OUTPUT_DIRECTORY       = .
+CREATE_SUBDIRS         = NO
+
+# Input
+INPUT                  = .
+FILE_PATTERNS          = *.h *.hpp *.cpp *.c
+RECURSIVE              = YES
+EXCLUDE                = docs
+
+# Extract options
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+OPTIMIZE_OUTPUT_FOR_C  = NO
+
+# Source browser
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
+
+# HTML output
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_FILE_EXTENSION    = .html
+
+# Diagrams (requires dot/graphviz)
+HAVE_DOT               = YES
+DOT_NUM_THREADS        = 2
+DOT_IMAGE_FORMAT       = svg
+CLASS_DIAGRAMS         = YES
+CALL_GRAPH             = NO
+CALLER_GRAPH           = NO
+DOT_GRAPH_MAX_NODES    = 50
+
+# Index and layout
+GENERATE_TREEVIEW      = YES
+
+# Misc
+FULL_PATH_NAMES        = NO
+JAVADOC_AUTOBRIEF      = YES
+QUIET                  = NO
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES

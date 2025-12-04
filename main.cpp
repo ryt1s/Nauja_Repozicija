@@ -1,3 +1,9 @@
+/**
+ * @file main.cpp
+ * @brief Programos įėjimo taškas. Vartotojo meniu, rikiavimas ir skirstymas.
+ */
+
+
 #include "student.h"
 #include "io.h"
 #include <vector>
@@ -37,6 +43,14 @@ int getIntChoice(const std::string& prompt, int min, int max) {
     return value;
 }
 
+/**
+ * @brief Rūšiuoja studentus pagal vidurkį arba medianą.
+ * @tparam Container std::vector<Student> arba std::list<Student>
+ * @param studentai Konteineris su Student objektais
+ * @param sortParam 1 = vidurkis, 2 = mediana
+ * @param order 1 = didėjimo, 2 = mažėjimo
+ * @return Užtruktas laikas sekundėmis
+ */
 template<typename Container>
 double rikiuoti(Container& studentai, int sortParam, int order) {
     auto start = high_resolution_clock::now();
@@ -54,7 +68,16 @@ double rikiuoti(Container& studentai, int sortParam, int order) {
 
     return duration<double>(high_resolution_clock::now() - start).count();
 }
-
+/**
+ * @brief Skirsto studentus į vargšus ir kietiakus
+ * @tparam Container Tinka std::vector<Student> arba std::list<Student>
+ * @param studentai Studentų konteineris
+ * @param vargsiukai Vector, į kurį įdedami studentai su galutiniu <5
+ * @param kietiakai Vector, į kurį įdedami studentai su galutiniu >=5
+ * @param strategy Skirstymo strategija (Copy, Move, Splice)
+ * @param sortParam Nustato, pagal ką skaičiuoti galutinį balą (1 - vidurkis, 2 - mediana)
+ * @return Laikas, per kurį buvo atliktas skirstymas (s)
+ */
 template<typename Container>
 double splitStudentus(Container& studentai,
                       std::vector<Student>& vargsiukai,

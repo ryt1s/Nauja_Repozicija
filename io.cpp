@@ -1,3 +1,9 @@
+/**
+ * @file io.cpp
+ * @brief IO implementacija: failų skaitymas ir rašymas.
+ */
+
+
 #include "io.h"
 #include <fstream>
 #include <sstream>
@@ -38,6 +44,13 @@ void generuotiFaila(const string& filename, int kiekStudentu, int kiekNd) {
          << " (" << kiekStudentu << " irasu)\n";
 }
 
+
+/**
+ * @brief Nuskaityti studentus iš failo
+ * @tparam Container Tinka std::vector<Student> arba std::list<Student>
+ * @param filename Failo pavadinimas
+ * @param studentai Konteineris, į kurį bus įrašyti studentai
+ */
 template<typename Container>
 void nuskaitytiIsFailoTemplate(const string& filename, Container& studentai) {
     ifstream fin(filename);
@@ -51,15 +64,29 @@ void nuskaitytiIsFailoTemplate(const string& filename, Container& studentai) {
         studentai.push_back(move(stud));
     }
 }
-
+/**
+ * @brief Nuskaityti studentus į vector
+ * @param filename Failo pavadinimas
+ * @param studentai Vector objektas, į kurį bus įrašyti studentai
+ */
 void nuskaitytiIsFailo(const string& filename, vector<Student>& studentai) {
     nuskaitytiIsFailoTemplate(filename, studentai);
 }
-
+/**
+ * @brief Nuskaityti studentus į list
+ * @param filename Failo pavadinimas
+ * @param studentai List objektas, į kurį bus įrašyti studentai
+ */
 void nuskaitytiIsFailo(const string& filename, list<Student>& studentai) {
     nuskaitytiIsFailoTemplate(filename, studentai);
 }
-
+/**
+ * @brief Išsaugoti studentus į failą
+ * @tparam Container Tinka std::vector<Student> arba std::list<Student>
+ * @param filename Failo pavadinimas
+ * @param students Studentų konteineris
+ * @param metod Galutinio balo skaičiavimo metodas (1 - vidurkis, 2 - mediana, 3 - abu)
+ */
 template <typename Container>
 void issaugotiIFailaTemplate(const std::string& filename, const Container& students, int metod) {
     std::ofstream fout(filename, std::ios::out | std::ios::trunc);
@@ -105,15 +132,31 @@ void issaugotiIFailaTemplate(const std::string& filename, const Container& stude
         fout.write(buffer.data(), buffer.size());
     }
 }
-
+/**
+ * @brief Įrašyti studentus į failą (vector versija)
+ * @param filename Failo pavadinimas
+ * @param students Vector objektas
+ * @param metod Galutinio balo skaičiavimo metodas
+ */
 void issaugotiIFaila(const string& filename, const vector<Student>& students, int metod) {
     issaugotiIFailaTemplate(filename, students, metod);
 }
-
+/**
+ * @brief Įrašyti studentus į failą (list versija)
+ * @param filename Failo pavadinimas
+ * @param students List objektas
+ * @param metod Galutinio balo skaičiavimo metodas
+ */
 void issaugotiIFaila(const string& filename, const list<Student>& students, int metod) {
     issaugotiIFailaTemplate(filename, students, metod);
 }
-
+/**
+ * @brief Skaito sveiką skaičių iš vartotojo
+ * @param pranesimas Tekstas, kurį išveda prieš skaitymą
+ * @param min Minimalus leidžiamas skaičius
+ * @param max Maksimalus leidžiamas skaičius
+ * @return Įvestas sveikas skaičius
+ */
 int inputSkaicius(const string& pranesimas, int min, int max) {
     int value;
     while (true) {
