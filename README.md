@@ -1,31 +1,53 @@
-# Studentų Programa (Versija 1.2)
+# Studentų Programos Projektas
 
-## Aprašas
+## Apžvalga
+Ši programa valdo studentų duomenis, skaičiuoja galutinius balus pagal vidurkį ir medianą, rikiuoja studentus, ir skirsto į grupes „vargsiukai“ ir „kietiakai“.  
 
-Ši programa skirta valdyti studentų duomenis: įvesti, rikiuoti pagal galutinį balą (vidurkį arba medianą), skirstyti į grupes („vargsiukai“ ir „kietiakai“) bei išsaugoti į failus. Programoje galima pasirinkti konteinerio tipą (`std::vector` arba `std::list`) ir skirstymo strategiją.  
-
-### Veiksmai programoje
-
-1. **Konteinerio pasirinkimas** – vartotojas gali pasirinkti `vector` arba `list`.  
-2. **Veiksmo pasirinkimas** – įvesti/atsitiktinai sugeneruoti studentus arba sugeneruoti testinius failus.  
-3. **Duomenų įvedimas** – galima pasirinkti vieną iš trijų būdų:  
-   - Rankiniu būdu  
-   - Atsitiktiniai duomenys  
-   - Nuskaitymas iš failo  
-
-4. **Galutinio balo skaičiavimo metodas** – galima pasirinkti vidurkį, medianą arba abu.  
-5. **Rikiavimo tvarka** – didėjimo arba mažėjimo tvarka pagal pasirinktą balo metodą.  
-6. **Studentų skirstymo strategija** – kopijavimas į du naujus konteinerius, perkėlimas į vieną naują konteinerį arba efektyviausias metodas.  
-7. **Rezultatų išsaugojimas** – studentų grupės išsaugomos į failus `vargsiukai.txt` ir `kietiakai.txt`.  
+Projekto versija: **v1.5**  
+- Palaiko **abstrakčią bazinę klasę `Zmogus`**.  
+- Studentas (`Student`) yra išvestinė klasė iš `Zmogus`.  
+- Išsaugoma **v1.2 logika**: įvedimas, failų nuskaitymas, rikiavimas, skirstymas.  
+- Įgyvendinta **trejų metodų taisyklė** (`Rule of Three`) Student klasėje.
 
 ---
 
-## Perdengti metodai
+## Klasių struktūra
 
-Programa naudoja perdengtus įvesties ir išvesties operatorius `Student` klasėje:
 
-### Įvesties operatorius (`operator>>`)
+- `Zmogus` yra abstrakti klasė, todėl negalima tiesiogiai kurti `Zmogus` objektų.  
+- `Student` paveldi visus žmogaus atributus ir prideda galutinių balų skaičiavimą.  
 
-- Leidžia įvesti `Student` objektus naudojant standartinę įvestį (`cin`) arba failus (`ifstream`).  
-- Vartotojas gali įvesti studento pavardę, vardą, namų darbų įvertinimus ir egzamino balą.  
-- Šis operatorius naudoja klasės metodą `readStudent`, kuris atlieka faktinį įvedimą ir galutinių balų skaičiavimą.  
+---
+
+## Programos funkcionalumas
+
+| Funkcija | Aprašymas |
+|----------|-----------|
+| Įvedimas | Studentų įvedimas rankiniu būdu arba generuojant atsitiktinius duomenis |
+| Failų nuskaitymas | Nuskaitymas iš `.txt` failų |
+| Galutinių balų skaičiavimas | Vidurkis, mediana arba abu |
+| Rikiavimas | Pagal vidurkį arba medianą, didėjimo / mažėjimo tvarka |
+| Skirstymas į grupes | „Vargsiukai“ (< 5 balų) ir „Kietiakai“ (≥ 5 balų) |
+| Išsaugojimas | Rezultatų išsaugojimas į failus `vargsiukai.txt` ir `kietiakai.txt` |
+
+---
+
+
+## Tikrinimas: klasės abstraktumas
+
+<img width="458" height="241" alt="image" src="https://github.com/user-attachments/assets/2c426512-a0d7-4424-a58d-a0a5a90e1198" />
+
+Tikrinimui buvo naudojamas toks kodas.
+
+
+
+| Veiksmas | Ekrano nuotrauka | Rezultatas |
+|----------|-----------------|------------|
+| Student objektas sukurtas sėkmingai | <img width="421" height="37" alt="image" src="https://github.com/user-attachments/assets/135d6598-21fc-49d7-a172-91458c0dd3b3" /> | Student objektai veikia kaip tikėtasi |
+| Bandymas sukurti Zmogus objektą (`Zmogus z;`) | <img width="514" height="51" alt="image" src="https://github.com/user-attachments/assets/59cd6d0f-e825-4e9f-9e9a-8e7df6048718" />| Kompiliavimo klaida – `Zmogus` abstrakti klasė |
+
+### Išvados
+- Negalima kurti `Zmogus` objektų (klaida kompiliavimo metu).  
+- `Student` objektai vis dar kuriami sėkmingai, naudojant `Zmogus` bazę.
+
+
