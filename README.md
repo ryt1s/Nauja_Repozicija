@@ -1,23 +1,77 @@
-# Studentų Programos Projektas
+# First-Project v2.0
 
-## Apžvalga
-Ši programa valdo studentų duomenis, skaičiuoja galutinius balus pagal vidurkį ir medianą, rikiuoja studentus, ir skirsto į grupes „vargsiukai“ ir „kietiakai“.  
+## Aprašymas
+Ši programa skirta studentų duomenų tvarkymui, įskaitant namų darbų ir egzamino balus.  
+Projektas palaiko kelias versijas:  
+- **v1.2** – Rule of three implementavimas  
+- **v1.5** – pridėta abstrakti bazinė klasė `Zmogus`  
+- **v2.0** – dokumentacija su Doxygen ir Unit testai su Catch2 v3  
 
-Projekto versija: **v1.5**  
-- Palaiko **abstrakčią bazinę klasę `Zmogus`**.  
-- Studentas (`Student`) yra išvestinė klasė iš `Zmogus`.  
-- Išsaugoma **v1.2 logika**: įvedimas, failų nuskaitymas, rikiavimas, skirstymas.  
-- Įgyvendinta **trejų metodų taisyklė** (`Rule of Three`) Student klasėje.
+Bazinė klasė `Zmogus` yra **abstrakti**, todėl jos objektų kurti negalima. Iš jos paveldi klasė `Student`.
+
+---
+
+##  Paleidimo instrukcijos
+
+### 1. Kompiliavimas
+
+| Tikslas | Komanda (naudojant `g++`) |
+| :--- | :--- |
+| **Pagrindinei programai** | `g++ src/main.cpp src/student.cpp src/io.cpp -Iinclude -o program.exe  ` |
+| **Unit testams** | `g++ -std=c++17 tests/test_student.cpp src/student.cpp src/io.cpp -Iinclude -o test_runner` |
+
+### 2. Programos paleidimas
+
+* **Pagrindinė programa:**
+    ```bash
+    ./program.exe
+    ```
+* **Demo abstrakčiai klasei:**
+    ```bash
+    ./demo_abstract.exe
+    ```
 
 ---
 
-## Klasių struktūra
+##  Unit testai
 
+Unit testai parašyti su **Catch2 v2*. Testai patikrina:
+* `Student` konstruktorius
+* Balų skaičiavimo metodus (`galVid`, `galMed`)
 
-- `Zmogus` yra abstrakti klasė, todėl negalima tiesiogiai kurti `Zmogus` objektų.  
-- `Student` paveldi visus žmogaus atributus ir prideda galutinių balų skaičiavimą.  
+Paleidimo komanda:
+```bash
+./test_runner
+```
+##  Doxygen dokumentacija
+
+Doxygen dokumentacija sugeneruota naudojant `Doxyfile`.
+
+* **Generavimo komanda:**
+    ```bash
+    doxygen Doxyfile
+    ```
+* **HTML katalogas:** `docs/html/index.html`
 
 ---
+
+##  Versijų istorija
+
+| Versija | Pakeitimai |
+| :--- | :--- |
+| **v1.2** | Originali versija su failų skaitymu, rašymu, balų skaičiavimu. |
+| **v1.5** | Pridėta **abstrakti klasė `Zmogus`** ir `Student` paveldėjimas. |
+| **v2.0** | **Doxygen dokumentacija**, **Unit testai**, projekto struktūros pertvarkymas. |
+
+---
+
+##  Išvados
+
+* `Zmogus` klasė yra **abstrakti**, jos objektų kurti negalima.
+* `Student` klasė **paveldi** `Zmogus` ir palaiko originalius metodus iš v1.2.
+* **Doxygen dokumentacija** pateikia kodo struktūros ir metodų aprašymus.
+* **Unit testai** demonstruoja, kad funkcijos veikia teisingai.
+* Projekto struktūra yra **švari**, visi failai aiškiai išdėstyti.
 
 ## Programos funkcionalumas
 
@@ -29,25 +83,5 @@ Projekto versija: **v1.5**
 | Rikiavimas | Pagal vidurkį arba medianą, didėjimo / mažėjimo tvarka |
 | Skirstymas į grupes | „Vargsiukai“ (< 5 balų) ir „Kietiakai“ (≥ 5 balų) |
 | Išsaugojimas | Rezultatų išsaugojimas į failus `vargsiukai.txt` ir `kietiakai.txt` |
-
----
-
-
-## Tikrinimas: klasės abstraktumas
-
-<img width="458" height="241" alt="image" src="https://github.com/user-attachments/assets/2c426512-a0d7-4424-a58d-a0a5a90e1198" />
-
-Tikrinimui buvo naudojamas toks kodas.
-
-
-
-| Veiksmas | Ekrano nuotrauka | Rezultatas |
-|----------|-----------------|------------|
-| Student objektas sukurtas sėkmingai | <img width="421" height="37" alt="image" src="https://github.com/user-attachments/assets/135d6598-21fc-49d7-a172-91458c0dd3b3" /> | Student objektai veikia kaip tikėtasi |
-| Bandymas sukurti Zmogus objektą (`Zmogus z;`) | <img width="514" height="51" alt="image" src="https://github.com/user-attachments/assets/59cd6d0f-e825-4e9f-9e9a-8e7df6048718" />| Kompiliavimo klaida – `Zmogus` abstrakti klasė |
-
-### Išvados
-- Negalima kurti `Zmogus` objektų (klaida kompiliavimo metu).  
-- `Student` objektai vis dar kuriami sėkmingai, naudojant `Zmogus` bazę.
 
 
