@@ -4,8 +4,8 @@
  */
 
 
-#include "student.h"
-#include "io.h"
+#include "../include/student.h"
+#include "../include/io.h"
 #include <vector>
 #include <list>
 #include <iostream>

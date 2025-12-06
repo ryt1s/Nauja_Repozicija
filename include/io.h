@@ -7,7 +7,7 @@
 #ifndef IO_H
 #define IO_H
 
-#include "student.h"
+#include "../include/student.h"
 #include <vector>
 #include <string>
 #include <list>

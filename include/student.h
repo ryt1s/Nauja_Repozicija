@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include "Zmogus.h"
+#include "../include/zmogus.h"
 
 double skaiciuotiMediana(const std::vector<int>& paz);
 
