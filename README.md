@@ -3,9 +3,10 @@
 ## Aprašymas
 Ši programa skirta studentų duomenų tvarkymui, įskaitant namų darbų ir egzamino balus.  
 Projektas palaiko kelias versijas:  
+- **v1.1** - perėjimas iš `struct` į `class`
 - **v1.2** – Rule of three implementavimas  
 - **v1.5** – pridėta abstrakti bazinė klasė `Zmogus`  
-- **v2.0** – dokumentacija su Doxygen ir Unit testai su Catch2 v3  
+- **v2.0** – dokumentacija su Doxygen ir Unit testai su Catch2 v2
 
 Bazinė klasė `Zmogus` yra **abstrakti**, todėl jos objektų kurti negalima. Iš jos paveldi klasė `Student`.
 
