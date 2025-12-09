@@ -72,7 +72,7 @@ Doxygen dokumentacija sugeneruota naudojant `Doxyfile`.
 * `Student` klasė **paveldi** `Zmogus` ir palaiko originalius metodus iš v1.2.
 * **Doxygen dokumentacija** pateikia kodo struktūros ir metodų aprašymus.
 * **Unit testai** demonstruoja, kad funkcijos veikia teisingai.
-* Projekto struktūra yra **švari**, visi failai aiškiai išdėstyti.
+* Projekto struktūra yra **švari** be jokių IDE failų.
 
 ## Programos funkcionalumas
 
