@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-#include "../student.h"
+#include "../include/student.h"
 
 // Testas – ar teisingai skaičiuojamas galutinis vidurkis
 TEST_CASE("Galutinio balo skaičiavimas pagal vidurkį", "[student]") {
@@ -34,7 +34,6 @@ TEST_CASE("Assignment operator", "[student]") {
     Student b("B", "BB", {9, 9}, 10);
 
     b = a;
-
     REQUIRE(b.vardas() == "A");
     REQUIRE(b.pavarde() == "AA");
     REQUIRE(b.paz() == a.paz());
