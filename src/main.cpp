@@ -250,7 +250,7 @@ int main() {
     string metricStr = (sortParam == 1) ? "Vidurkis" : "Mediana";
     string orderStr = (order == 1) ? "Didejimo tvarka" : "Mazejimo tvarka";
 
-    cout << "\n========== TESTING FILE: " << failas << " ==========\n";
+    cout << "\n========== Testuojamas failas: " << failas << " ==========\n";
     cout << "Duomenu nuskaitymas: "; printTime(t_read); cout << "\n";
     cout << "Rikiavimas pagal " << metricStr << " (" << orderStr << "): "; printTime(t_sort); cout << "\n";
     cout << "Skirstymas i grupes: "; printTime(t_split); cout << "\n";  
