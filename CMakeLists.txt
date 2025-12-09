@@ -15,17 +15,15 @@ add_executable(program
     src/main.cpp
     src/io.cpp
     src/student.cpp
-    src/zmogus.cpp
 )
 
 # ------------------------
 # ABSTRACT DEMO
 # ------------------------
-add_executable(demo_abstract
-    demo_abstract.cpp
+add_executable(demo
+    src/demo_abstract.cpp
     src/io.cpp
     src/student.cpp
-    src/zmogus.cpp
 )
 
 # ------------------------
@@ -35,7 +33,6 @@ add_executable(test_runner
     tests/test_student.cpp
     src/student.cpp
     src/io.cpp
-    src/zmogus.cpp
 )
 
 # Kad testuose būtų galima include "catch.hpp"

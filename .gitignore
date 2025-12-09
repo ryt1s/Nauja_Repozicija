@@ -47,8 +47,8 @@ build/
 kursiokai.txt
 .vscode/
 main_temp.cpp
-kietiakai.txt
-vargsiukai.txt
 program_O*.exe
 program.exe
 latex/
+vargsiukai.txt
+kietiakai.txt

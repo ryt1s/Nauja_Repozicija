@@ -1,5 +1,5 @@
-#include "Zmogus.h"
-#include "Student.h"
+#include "../include/zmogus.h"
+#include "../include/Student.h"
 #include <iostream>
 
 int main() {
