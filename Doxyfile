@@ -10,6 +10,7 @@ INPUT                  = .
 FILE_PATTERNS          = *.h *.hpp *.cpp *.c
 RECURSIVE              = YES
 EXCLUDE                = docs
+EXCLUDE                = tests
 
 # Extract options
 EXTRACT_ALL            = YES

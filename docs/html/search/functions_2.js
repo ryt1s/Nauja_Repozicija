@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['galmed_0',['galMed',['../class_student.html#a28e1841ceedc93a78e226b9e0e4fff59',1,'Student']]],
-  ['galvid_1',['galVid',['../class_student.html#a3e4341051aba3e2d2da8118768a6ed73',1,'Student']]],
-  ['generuotifaila_2',['generuotiFaila',['../io_8cpp.html#ada641fa8a3d19150054860e532595858',1,'generuotiFaila(const string &amp;filename, int kiekStudentu, int kiekNd):&#160;io.cpp'],['../io_8h.html#a635b6dcd44853718c2cff0981d82d60a',1,'generuotiFaila(const std::string &amp;filename, int kiekStudentu, int kiekNd):&#160;io.h']]],
-  ['getintchoice_3',['getIntChoice',['../main_8cpp.html#a76a2379d8eb69a7a02211d47db366e0b',1,'main.cpp']]]
+  ['inputskaicius_0',['inputSkaicius',['../io_8h.html#a9d847e75015cb209432b7c4217486840',1,'inputSkaicius(const std::string &amp;pranesimas, int min, int max):&#160;io.h'],['../io_8cpp.html#a77988c6f949b499e9eaea3629a6654fb',1,'inputSkaicius(const string &amp;pranesimas, int min, int max):&#160;io.cpp']]],
+  ['issaugotiifaila_1',['issaugotiIFaila',['../io_8h.html#a9393f274723d756fe52ad5ed78242cba',1,'issaugotiIFaila(const std::string &amp;filename, const std::vector&lt; Student &gt; &amp;studentai, int metod):&#160;io.h'],['../io_8h.html#a5c87c076a7bd6d7f5e6d9076d4058f19',1,'issaugotiIFaila(const std::string &amp;filename, const std::list&lt; Student &gt; &amp;studentai, int metod):&#160;io.h'],['../io_8cpp.html#a17444bbf7d51a4ee5977422e286799a3',1,'issaugotiIFaila(const string &amp;filename, const vector&lt; Student &gt; &amp;students, int metod):&#160;io.cpp'],['../io_8cpp.html#ad891bcceb7ae4bae9001acd400c5ac5f',1,'issaugotiIFaila(const string &amp;filename, const list&lt; Student &gt; &amp;students, int metod):&#160;io.cpp']]],
+  ['issaugotiifailatemplate_2',['issaugotiIFailaTemplate',['../io_8cpp.html#a5bef5630346669ea40740dc386f321e6',1,'io.cpp']]]
 ];

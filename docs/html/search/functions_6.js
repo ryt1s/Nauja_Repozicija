@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['operator_3c_3c_0',['operator&lt;&lt;',['../student_8cpp.html#a07bff4b34ee18e927d9e711b6aef336f',1,'student.cpp']]],
-  ['operator_3d_1',['operator=',['../class_student.html#ad05dd6148523a2a8b38128b60297b52a',1,'Student']]],
-  ['operator_3e_3e_2',['operator&gt;&gt;',['../student_8cpp.html#a7154134029d768635e256507170d649b',1,'student.cpp']]]
+  ['pavarde_0',['pavarde',['../class_zmogus.html#a24b5b4208f386916dc5c1ccf006bdedf',1,'Zmogus']]],
+  ['paz_1',['paz',['../class_student.html#a0fa43a71657005be3593f5236d56cc9f',1,'Student']]],
+  ['print_2',['print',['../class_student.html#afce044056855698fa62cca1d17b6e4ee',1,'Student::print()'],['../class_zmogus.html#aa52869cc6a869223fedcb9f7676534fc',1,'Zmogus::print()']]]
 ];

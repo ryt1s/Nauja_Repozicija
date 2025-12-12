@@ -9,6 +9,4 @@ digraph "io.h"
   Node2 [id="Node000002",label="io.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$io_8cpp.html",tooltip="IO implementacija: failų skaitymas ir rašymas."];
   Node1 -> Node3 [id="edge2_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node3 [id="Node000003",label="main.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$main_8cpp.html",tooltip="Programos įėjimo taškas."];
-  Node1 -> Node4 [id="edge3_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node4 [id="Node000004",label="main_temp.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$main__temp_8cpp.html",tooltip=" "];
 }

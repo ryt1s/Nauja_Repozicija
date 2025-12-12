@@ -12,7 +12,7 @@ digraph "student.h"
   Node1 -> Node4 [id="edge3_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
   Node4 [id="Node000004",label="iostream",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
   Node1 -> Node5 [id="edge4_Node000001_Node000005",color="steelblue1",style="solid",tooltip=" "];
-  Node5 [id="Node000005",label="Zmogus.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$zmogus_8h.html",tooltip=" "];
+  Node5 [id="Node000005",label="../include/zmogus.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$zmogus_8h.html",tooltip=" "];
   Node5 -> Node2 [id="edge5_Node000005_Node000002",color="steelblue1",style="solid",tooltip=" "];
   Node5 -> Node4 [id="edge6_Node000005_Node000004",color="steelblue1",style="solid",tooltip=" "];
 }

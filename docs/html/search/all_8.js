@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['main_0',['main',['../_c_make_c_x_x_compiler_id_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;CMakeCXXCompilerId.cpp'],['../demo__abstract_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;demo_abstract.cpp'],['../main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;main.cpp'],['../main__temp_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;main_temp.cpp']]],
-  ['main_2ecpp_1',['main.cpp',['../main_8cpp.html',1,'']]],
-  ['main_5ftemp_2ecpp_2',['main_temp.cpp',['../main__temp_8cpp.html',1,'']]],
-  ['move_3',['Move',['../main_8cpp.html#a43ffe021bc46f9727f66464271fcd114a6bc362dbf494c61ea117fe3c71ca48a5',1,'main.cpp']]]
+  ['pavarde_0',['pavarde',['../class_zmogus.html#a24b5b4208f386916dc5c1ccf006bdedf',1,'Zmogus']]],
+  ['pavarde_5f_1',['pavarde_',['../class_zmogus.html#a85cd6103a5f887059263d15413a3f081',1,'Zmogus']]],
+  ['paz_2',['paz',['../class_student.html#a0fa43a71657005be3593f5236d56cc9f',1,'Student']]],
+  ['paz_5f_3',['paz_',['../class_student.html#a1f0ecb30fc2870c85b8c9147d8d567bd',1,'Student']]],
+  ['print_4',['print',['../class_student.html#afce044056855698fa62cca1d17b6e4ee',1,'Student::print()'],['../class_zmogus.html#aa52869cc6a869223fedcb9f7676534fc',1,'Zmogus::print()']]]
 ];

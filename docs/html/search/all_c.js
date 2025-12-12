@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['readstudent_0',['readStudent',['../class_student.html#a9c5cbd2b4ce6628b671a1dfd54faa0f6',1,'Student']]],
-  ['rikiuoti_1',['rikiuoti',['../main_8cpp.html#a90dfc65299b347b8cf793f31a27646b6',1,'main.cpp']]]
+  ['zmogus_0',['Zmogus',['../class_zmogus.html',1,'Zmogus'],['../class_zmogus.html#a905fef3b8ad421a6d023c7ebc295f48e',1,'Zmogus::Zmogus()=default'],['../class_zmogus.html#ae6bfb71e4c8fddf15f3a19b4bcd6fd26',1,'Zmogus::Zmogus(const std::string &amp;vardas, const std::string &amp;pavarde)']]],
+  ['zmogus_2eh_1',['zmogus.h',['../zmogus_8h.html',1,'']]]
 ];
